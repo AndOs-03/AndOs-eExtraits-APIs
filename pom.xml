@@ -21,7 +21,7 @@
 
   <properties>
     <java.version>17</java.version>
-    <org.springdoc.version>2.5.0</org.springdoc.version>
+    <org.springdoc.version>2.8.6</org.springdoc.version>
     <maven.compiler.verion>3.13.0</maven.compiler.verion>
 
     <lombok.version>1.18.34</lombok.version>
