@@ -43,6 +43,11 @@ public class ExtraitsDecesServiceImpl implements ExtraitsDecesService {
           + "registre !");
     }
 
+    if (commande.getDateNaissance().isAfter(commande.getDateDeces())) {
+      throw new AndOsEExtraitFunctionnalException("La date de naissance doit être avant la date "
+          + "de décès !");
+    }
+
     ExtraitDecesTable extraitDecesTable = this.genererExtraitDecesTable(commande, nouveauRegistre);
     this.jpaExtraitsDecesRepository.save(extraitDecesTable);
   }
@@ -57,6 +62,11 @@ public class ExtraitsDecesServiceImpl implements ExtraitsDecesService {
     if (existe && !Objects.equals(commande.getId(), extraitDecesTable.getId())) {
       throw new AndOsEExtraitFunctionnalException("Un extrait de décès existe déjà avec ce "
           + "registre !");
+    }
+
+    if (commande.getDateNaissance().isAfter(commande.getDateDeces())) {
+      throw new AndOsEExtraitFunctionnalException("La date de naissance doit être avant la date "
+          + "de décès !");
     }
 
     extraitDecesTable = this.genererExtraitDecesTable(commande, nouveauRegistre);

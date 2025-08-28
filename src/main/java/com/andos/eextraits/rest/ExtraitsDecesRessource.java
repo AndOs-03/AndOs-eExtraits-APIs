@@ -54,8 +54,8 @@ public class ExtraitsDecesRessource {
   @GetMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
   public ResponseEntity<ExtraitDecesDetailsVM> recupererParId(@PathVariable("id") Long id) {
-    ExtraitDecesDetailsVM centreVm = this.extraitsDecesService.recupererParId(id);
-    return new ResponseEntity<>(centreVm, HttpStatus.OK);
+    ExtraitDecesDetailsVM extaitVm = this.extraitsDecesService.recupererParId(id);
+    return new ResponseEntity<>(extaitVm, HttpStatus.OK);
   }
 
   @GetMapping("/recuperer-par-registre")
