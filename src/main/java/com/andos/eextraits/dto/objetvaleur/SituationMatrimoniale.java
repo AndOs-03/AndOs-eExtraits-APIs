@@ -5,31 +5,5 @@ package com.andos.eextraits.dto.objetvaleur;
  */
 public enum SituationMatrimoniale {
 
-  MARIEE {
-    @Override
-    public String toString() {
-      return "Mariée";
-    }
-  },
-
-  CELIBATAIRE {
-    @Override
-    public String toString() {
-      return "Célibataire";
-    }
-  },
-
-  VEUVE {
-    @Override
-    public String toString() {
-      return "Veuve";
-    }
-  },
-
-  DIVORCEE {
-    @Override
-    public String toString() {
-      return "Divorcée";
-    }
-  }
+  MARIEE, CELIBATAIRE, VEUVE, DIVORCEE
 }
