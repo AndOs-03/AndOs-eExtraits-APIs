@@ -58,7 +58,7 @@ public class CentresRessource {
 
   @GetMapping("/recuperer-par-nom/{nom}")
   @ResponseStatus(HttpStatus.OK)
-  public ResponseEntity<CentreVM> recupererParId(@PathVariable("nom") String nom) {
+  public ResponseEntity<CentreVM> recupererParNom(@PathVariable("nom") String nom) {
     CentreVM centreVm = this.centresService.recupererParNom(nom);
     return new ResponseEntity<>(centreVm, HttpStatus.OK);
   }
