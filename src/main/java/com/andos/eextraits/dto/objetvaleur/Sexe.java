@@ -5,17 +5,5 @@ package com.andos.eextraits.dto.objetvaleur;
  */
 public enum Sexe {
 
-  MASCULIN {
-    @Override
-    public String toString() {
-      return "Masculin";
-    }
-  },
-
-  FEMININ {
-    @Override
-    public String toString() {
-      return "Féminin";
-    }
-  },
+  MASCULIN, FEMININ
 }
