@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CentresServiceImpl implements CentresService {
 
-  private final Logger logger = Logger.getLogger(CentresService.class.getName());
+  private final Logger logger = Logger.getLogger(CentresServiceImpl.class.getName());
 
   private final JpaCentresRepository jpaCentresRepository;
 
