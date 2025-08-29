@@ -1,5 +1,7 @@
 package com.andos.eextraits.dto.objetvaleur;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,20 +20,19 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PersonneExtraitNaissance {
 
-  private Long id;
+  @NotBlank(message = "Le nom est obligatoire !")
   private String nom;
+  @NotBlank(message = "Le prénom est obligatoire !")
   private String prenoms;
+  @NotNull(message = "La date de naissance est obligatoire !")
   private LocalDate dateNaissance;
+  @NotBlank(message = "Le lieu de naissance est obligatoire !")
   private String lieuNaissance;
-  private boolean mariage;
-  private LocalDate dateMariage;
-  private String lieuMariage;
-  private String epouOuEpouse;
-  private boolean divorce;
-  private LocalDate dateDeces;
-  private String lieuDeces;
-  private String registre;
+  @NotNull(message = "La sexe est obligatoire !")
   private Sexe sexe;
+  private MentionsEventuelle mentionsEventuelle;
+  @NotNull(message = "Renseignez les informations du père !")
   private ParentExtrait pere;
+  @NotNull(message = "Renseignez les informations de la mère !")
   private ParentExtrait mere;
 }

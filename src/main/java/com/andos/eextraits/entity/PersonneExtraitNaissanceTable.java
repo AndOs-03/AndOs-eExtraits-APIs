@@ -1,5 +1,6 @@
 package com.andos.eextraits.entity;
 
+import com.andos.eextraits.dto.objetvaleur.MentionsEventuelle;
 import com.andos.eextraits.dto.objetvaleur.ParentExtrait;
 import com.andos.eextraits.dto.objetvaleur.Sexe;
 import jakarta.persistence.AttributeOverride;
@@ -12,7 +13,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 import lombok.Getter;
@@ -34,16 +34,11 @@ public class PersonneExtraitNaissanceTable {
   private String prenoms;
   private LocalDate dateNaissance;
   private String lieuNaissance;
-  private boolean mariage;
-  private LocalDate dateMariage;
-  private String lieuMariage;
-  private String epouOuEpouse;
-  private boolean divorce;
-  private LocalDate dateDeces;
-  private String lieuDeces;
-  private String registre;
   @Enumerated(EnumType.STRING)
   private Sexe sexe;
+
+  @Embedded
+  private MentionsEventuelle mentionsEventuelle;
 
   @Embedded
   @AttributeOverrides({
@@ -58,7 +53,4 @@ public class PersonneExtraitNaissanceTable {
       @AttributeOverride(name = "typeParent", column = @Column(name = "type_parent_mere"))
   })
   private ParentExtrait mere;
-
-  @OneToOne(mappedBy = "personne")
-  private ExtraitNaissancesTable extraitNaissance;
 }

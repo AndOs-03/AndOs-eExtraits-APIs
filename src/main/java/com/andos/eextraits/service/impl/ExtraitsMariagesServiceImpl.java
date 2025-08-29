@@ -10,7 +10,6 @@ import com.andos.eextraits.exception.AndOsEExtraitFunctionnalException;
 import com.andos.eextraits.exception.ObjetNonTrouveException;
 import com.andos.eextraits.mappers.ExtraitsMariageMapper;
 import com.andos.eextraits.repository.JpaExtraitsMariagesRepository;
-import com.andos.eextraits.repository.JpaPersonneExtraitMariageRepository;
 import com.andos.eextraits.service.ExtraitsMariagesService;
 import com.andos.eextraits.utils.FormaterDateService;
 import java.util.List;
@@ -27,16 +26,11 @@ public class ExtraitsMariagesServiceImpl implements ExtraitsMariagesService {
   private final Logger logger = Logger.getLogger(ExtraitsMariagesServiceImpl.class.getName());
 
   private final JpaExtraitsMariagesRepository jpaExtraitsMariagesRepository;
-  private final JpaPersonneExtraitMariageRepository jpaPersonneExtraitMariageRepository;
   private final ExtraitsMariageMapper extraitsMariageMapper;
   private final FormaterDateService formaterDateService;
 
-  public ExtraitsMariagesServiceImpl(
-      JpaExtraitsMariagesRepository jpaExtraitsMariagesRepository,
-      JpaPersonneExtraitMariageRepository jpaPersonneExtraitMariageRepository
-  ) {
+  public ExtraitsMariagesServiceImpl(JpaExtraitsMariagesRepository jpaExtraitsMariagesRepository) {
     this.jpaExtraitsMariagesRepository = jpaExtraitsMariagesRepository;
-    this.jpaPersonneExtraitMariageRepository = jpaPersonneExtraitMariageRepository;
     this.extraitsMariageMapper = ExtraitsMariageMapper.INSTANCE;
     this.formaterDateService = new FormaterDateService();
   }
@@ -101,8 +95,8 @@ public class ExtraitsMariagesServiceImpl implements ExtraitsMariagesService {
 
   @Override
   public List<ExtraitMariageEssentielVM> lister() {
-    List<ExtraitMariagesTable> extraitDecesTables = this.jpaExtraitsMariagesRepository.findAll();
-    return extraitDecesTables.stream()
+    List<ExtraitMariagesTable> extraitTables = this.jpaExtraitsMariagesRepository.findAll();
+    return extraitTables.stream()
         .map(this.extraitsMariageMapper::extraitMariagesTableVersExtraitMariageEssentielVM)
         .toList();
   }
