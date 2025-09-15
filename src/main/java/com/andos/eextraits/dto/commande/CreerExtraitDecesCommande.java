@@ -20,7 +20,7 @@ public class CreerExtraitDecesCommande {
 
   @Min(value = 1, message = "L'année est obligatoire !")
   private int annee;
-  @NotBlank(message = "Le numéro de registre est obligatoire !")
+  @NotBlank(message = "Le numéro d'acte est obligatoire !")
   private String numeroRegistre;
   @NotNull(message = "La date du registre est obligatoire !")
   private LocalDate dateRegistre;
