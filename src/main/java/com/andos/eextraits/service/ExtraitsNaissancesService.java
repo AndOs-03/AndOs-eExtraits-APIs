@@ -22,6 +22,8 @@ public interface ExtraitsNaissancesService {
 
   ExtraitNaissanceDetailsVM recupererParId(Long id);
 
+  ExtraitNaissanceEssentielVM recupererParIdEssentiel(Long id);
+
   ExtraitNaissanceDetailsVM recupererParRegistre(String registre, Long centreId);
 
   List<ExtraitNaissanceEssentielVM> lister(Long centreId);

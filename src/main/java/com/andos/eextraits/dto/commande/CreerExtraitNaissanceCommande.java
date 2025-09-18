@@ -32,7 +32,7 @@ public class CreerExtraitNaissanceCommande {
   private String tribunalJugementSupletif;
   private boolean extraitTypeTPI;
   private boolean nouveauModel;
-  @NotNull(message = "L'identifiant du centre est obligatoire !")
+//  @NotNull(message = "L'identifiant du centre est obligatoire !")
   private Long centreId;
   @NotNull(message = "Renseignez les informations sur la personnalité !")
   @Valid

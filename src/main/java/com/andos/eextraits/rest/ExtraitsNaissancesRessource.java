@@ -58,6 +58,14 @@ public class ExtraitsNaissancesRessource {
     return new ResponseEntity<>(extaitVm, HttpStatus.OK);
   }
 
+  @GetMapping("/{id}/essentiel")
+  @ResponseStatus(HttpStatus.OK)
+  public ResponseEntity<ExtraitNaissanceEssentielVM> recupererParIdEssentiel(
+      @PathVariable("id") Long id) {
+    ExtraitNaissanceEssentielVM extaitVm = extraitsNaissancesService.recupererParIdEssentiel(id);
+    return new ResponseEntity<>(extaitVm, HttpStatus.OK);
+  }
+
   @GetMapping("/centre/{centreId}/recuperer-par-registre")
   @ResponseStatus(HttpStatus.OK)
   public ResponseEntity<ExtraitNaissanceDetailsVM> recupererParRegistre(

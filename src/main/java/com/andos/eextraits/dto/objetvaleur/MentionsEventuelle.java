@@ -17,13 +17,13 @@ import lombok.Setter;
 @Embeddable
 public class MentionsEventuelle {
 
-  private boolean mariage;
+  private Boolean mariage = false;
   private LocalDate dateMariage;
   private String lieuMariage;
   private String epouOuEpouse;
-  private boolean divorce;
+  private Boolean divorce = false;
   private LocalDate dateDivorce;
-  private boolean decede;
+  private Boolean decede = false;
   private LocalDate dateDeces;
   private String lieuDeces;
 }
