@@ -6,6 +6,7 @@ import com.andos.eextraits.dto.vm.ExtraitNaissanceDetailsVM;
 import com.andos.eextraits.dto.vm.ExtraitNaissanceEssentielVM;
 import com.andos.eextraits.entity.CentresTable;
 import com.andos.eextraits.entity.ExtraitNaissancesTable;
+import com.andos.eextraits.entity.ExtraitNaissancesTable.ExtraitNaissancesBuilder;
 import com.andos.eextraits.entity.PersonneExtraitNaissanceTable;
 import com.andos.eextraits.exception.AndOsEExtraitFunctionnalException;
 import com.andos.eextraits.exception.ObjetNonTrouveException;
@@ -96,6 +97,14 @@ public class ExtraitsNaissancesServiceImpl implements ExtraitsNaissancesService 
   }
 
   @Override
+  public ExtraitNaissanceEssentielVM recupererParIdEssentiel(Long id) {
+    ExtraitNaissancesTable extraitTable = this.jpaExtraitsNaissancesRepository.findById(id)
+        .orElseThrow(() -> new ObjetNonTrouveException("L'extrait de naissance n'existe pas !"));
+    return extraitsNaissanceMapper.extraitNaissanceTableVersExtraitNaissanceEssentielVM(
+        extraitTable);
+  }
+
+  @Override
   public ExtraitNaissanceDetailsVM recupererParRegistre(String registre, Long centreId) {
     ExtraitNaissancesTable extraitTable = this.jpaExtraitsNaissancesRepository
         .findByRegistreAndCentreId(registre, centreId)
@@ -123,10 +132,7 @@ public class ExtraitsNaissancesServiceImpl implements ExtraitsNaissancesService 
       personne.setId(extraitTable.getPersonne().getId());
     }
 
-    CentresTable centresTable = new CentresTable();
-    centresTable.setId(commande.getCentreId());
-
-    return new ExtraitNaissancesTable.ExtraitNaissancesBuilder()
+    ExtraitNaissancesTable build = new ExtraitNaissancesBuilder()
         .annee(commande.getAnnee())
         .numeroRegistre(commande.getNumeroRegistre())
         .dateRegistre(commande.getDateRegistre())
@@ -139,9 +145,24 @@ public class ExtraitsNaissancesServiceImpl implements ExtraitsNaissancesService 
         .centreEtatCivil(commande.getCentreEtatCivil())
         .registreN(commande.getRegistreN())
         .nouveauModel(commande.isNouveauModel())
-        .centre(centresTable)
         .personne(personne)
         .build();
+
+    if (!commande.isExtraitTypeTPI()) {
+      build.setNumeroJugementSupletif(null);
+      build.setDateJugementSupletif(null);
+      build.setTribunalJugementSupletif(null);
+    }
+
+    if (Objects.nonNull(commande.getCentreId())) {
+      CentresTable centresTable = new CentresTable();
+      centresTable.setId(commande.getCentreId());
+      build.setCentre(centresTable);
+    } else if (Objects.nonNull(extraitTable) && Objects.nonNull(extraitTable.getCentre())) {
+      build.setCentre(extraitTable.getCentre());
+    }
+
+    return build;
   }
 
   private String genererNouveauRegistre(CreerExtraitNaissanceCommande commande) {
@@ -151,9 +172,11 @@ public class ExtraitsNaissancesServiceImpl implements ExtraitsNaissancesService 
   }
 
   private void verifierCentre(CreerExtraitNaissanceCommande commande) {
-    boolean centreExiste = this.jpaCentresRepository.existsById(commande.getCentreId());
-    if (!centreExiste) {
-      throw new ObjetNonTrouveException("Le centre n'existe pas");
+    if (Objects.nonNull(commande.getCentreId())) {
+      boolean centreExiste = this.jpaCentresRepository.existsById(commande.getCentreId());
+      if (!centreExiste) {
+        throw new ObjetNonTrouveException("Le centre n'existe pas");
+      }
     }
   }
 }
