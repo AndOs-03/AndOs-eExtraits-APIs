@@ -5,9 +5,15 @@ import com.andos.eextraits.dto.commande.ModifierExtraitDecesCommande;
 import com.andos.eextraits.dto.vm.ExtraitDecesDetailsVM;
 import com.andos.eextraits.dto.vm.ExtraitDecesEssentielVM;
 import com.andos.eextraits.service.ExtraitsDecesService;
+import com.andos.eextraits.service.GenererFichierExtraitService;
 import jakarta.validation.Valid;
+import java.io.ByteArrayOutputStream;
 import java.util.List;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,9 +34,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class ExtraitsDecesRessource {
 
   private final ExtraitsDecesService extraitsDecesService;
+  private final GenererFichierExtraitService genererFichierExtraitService;
 
-  public ExtraitsDecesRessource(ExtraitsDecesService extraitsDecesService) {
+  public ExtraitsDecesRessource(
+      ExtraitsDecesService extraitsDecesService,
+      GenererFichierExtraitService genererFichierExtraitService
+  ) {
     this.extraitsDecesService = extraitsDecesService;
+    this.genererFichierExtraitService = genererFichierExtraitService;
   }
 
   @PostMapping
@@ -71,5 +82,27 @@ public class ExtraitsDecesRessource {
   public ResponseEntity<List<ExtraitDecesEssentielVM>> lister() {
     List<ExtraitDecesEssentielVM> extraitDecesVms = this.extraitsDecesService.lister();
     return new ResponseEntity<>(extraitDecesVms, HttpStatus.OK);
+  }
+
+  @GetMapping("/{id}/generer-fichier-extrait")
+  @ResponseStatus(HttpStatus.OK)
+  public ResponseEntity<Resource> genererFichierExtrait(
+      @PathVariable Long id,
+      @RequestParam("institutionId") Long institutionId,
+      @RequestParam("centreId") Long centreId
+  ) {
+    ExtraitDecesDetailsVM extaitVm = this.extraitsDecesService.recupererParId(id);
+    ByteArrayOutputStream byteArray = this.genererFichierExtraitService.extraitDeces(extaitVm,
+        institutionId, centreId);
+
+    byte[] bytes = byteArray.toByteArray();
+    ByteArrayResource byteArrayResource = new ByteArrayResource(bytes);
+    String nomPrenoms = extaitVm.nom() + " " + extaitVm.prenoms();
+    String nomFichier = "extrait - décès - " + nomPrenoms + ".pdf";
+
+    return ResponseEntity.ok()
+        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + nomFichier)
+        .contentType(MediaType.APPLICATION_PDF)
+        .body(byteArrayResource);
   }
 }

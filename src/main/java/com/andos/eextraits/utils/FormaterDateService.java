@@ -8,13 +8,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
+import net.sf.jasperreports.engine.JRDefaultScriptlet;
 
 /**
  * @author Anderson Ouattara 2025-08-28
  */
 @Getter
 @Setter
-public class FormaterDateService {
+public class FormaterDateService extends JRDefaultScriptlet {
 
   private SimpleDateFormat formatter;
   private Date date;
@@ -100,5 +101,16 @@ public class FormaterDateService {
    */
   public static YearMonth convertirVersYearMonth(int mois, int annee) {
     return YearMonth.of(annee, mois);
+  }
+
+  /**
+   * <p>Retourne le mois de la date au format lettre.</p>
+   *
+   * @param date la date
+   * @return le mois au format Janvier
+   */
+  public static String dateVersMoisEnLettre(LocalDate date) {
+    var formatter = DateTimeFormatter.ofPattern("MMMM");
+    return date.format(formatter);
   }
 }
