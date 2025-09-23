@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="JrExtraitDeces" pageWidth="595" pageHeight="842" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="50" bottomMargin="50" uuid="fa6c4fbd-c8e0-4970-96a5-c23a028ce0d8">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<scriptlet name="FormatDateScriptlet" class="com.andos.eextraits.utils.FormaterDateService"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="embleme" class="java.io.InputStream"/>
+	<field name="annee" class="java.lang.Integer"/>
+	<field name="registre" class="java.lang.String"/>
+	<field name="dateDeces" class="java.lang.String"/>
+	<field name="lieuDeces" class="java.lang.String"/>
+	<field name="nom" class="java.lang.String"/>
+	<field name="prenoms" class="java.lang.String"/>
+	<field name="nationalite" class="java.lang.String"/>
+	<field name="profession" class="java.lang.String"/>
+	<field name="domicile" class="java.lang.String"/>
+	<field name="dateNaissance" class="java.lang.String"/>
+	<field name="lieuNaissance" class="java.lang.String"/>
+	<field name="etatCivil" class="java.lang.String"/>
+	<field name="centreEtatCivil" class="java.lang.String"/>
+	<field name="registreN" class="java.lang.String"/>
+	<field name="situationMatrimoniale" class="java.lang.String"/>
+	<field name="pere" class="java.lang.String"/>
+	<field name="mere" class="java.lang.String"/>
+	<field name="centre" class="java.lang.String"/>
+	<field name="officier" class="java.lang.String"/>
+	<field name="titreOfficier" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="636" splitType="Stretch">
+			<staticText>
+				<reportElement x="5" y="3" width="185" height="15" uuid="970376f8-73a6-4761-84f4-eb87e27f4d98">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<text><![CDATA[REPUBLIQUE DE CÔTE D'IVOIRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="303" y="2" width="208" height="25" uuid="4ee423a2-0e26-4f73-af18-8489abd3d236">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Georgia" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[E X T R A I T]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="303" y="29" width="210" height="20" uuid="a7c040a0-f385-4934-99af-2e845dedab59">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="14"/>
+				</textElement>
+				<text><![CDATA[du Registre des actes de l'Etat Civil]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="352" y="47" width="78" height="20" uuid="24a4373b-4392-4245-bbb6-abc1427e1985">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Calibri" size="14"/>
+				</textElement>
+				<text><![CDATA[pour l'année]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="429" y="47" width="65" height="20" uuid="6c5f4105-b298-4eaa-8537-761b5016afe8">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Calibri" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{annee}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="101" width="178" height="15" uuid="981db363-da1e-4931-a431-590820b18e3a">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Georgia" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ETAT CIVIL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="115" width="178" height="17" uuid="112e0c20-57b1-4a72-a3ef-4275177ebc76">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Georgia" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[-------]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="125" width="185" height="15" uuid="0257277a-fdcc-4c4c-a91b-17d3fc042482">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<text><![CDATA[CIRCONSCRIPTION D'ETAT CIVIL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="5" y="142" width="185" height="15" uuid="e58e5cc5-c9a1-462f-86d6-ded06b9d11f1">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DE " + $F{etatCivil}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="160" width="185" height="15" uuid="4d3f2f01-f83c-4fb4-8c5e-cc77b9d1e2bb">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<text><![CDATA[CENTRE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="5" y="178" width="185" height="15" uuid="2554c207-19ab-403d-ad77-7df50ab08560">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DE " + $F{centreEtatCivil}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="223" width="220" height="15" uuid="0c3951d9-e5df-4b0a-a43c-224b0df0cb68">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<span style='font-weight: bold;'>Nº " + $F{registre} + "</span>" + ($F{registreN} != null ? " du registre " + $F{registreN} : "")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="253" width="185" height="15" uuid="bf154126-2624-4454-b0ed-e6365a0fc36a">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<text><![CDATA[DECES DE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="5" y="277" width="185" height="15" uuid="ee0842de-0b1d-41c7-9762-4d851a69f289">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="297" width="185" height="15" uuid="b4d1d491-cecb-46ce-a262-25f0d19a4a6d">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prenoms} + " ./."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="101" width="275" height="15" uuid="8ff32bec-ed96-40cc-9da6-d80fe40f91e6">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Calibri" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Le " + "<span style='font-weight: bold;'>" + ($F{dateDeces} != null ? $F{dateDeces} : "") + " ./.</span>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="126" width="275" height="15" uuid="56cb9099-9ee6-48ad-aeed-50c6003781c0">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Calibri" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["à " + "<span style='font-weight: bold;'>" + ($F{lieuDeces} != null ? $F{lieuDeces} : "") + " ./.</span>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="152" width="275" height="15" uuid="c1a982d7-045d-4eff-8b8e-d293cb2d2640">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Calibri" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["est décédé(e) " + "<span style='font-weight: bold;'>" + $F{prenoms} + " ./.</span>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="177" width="275" height="15" uuid="d305d3a6-26d3-4cea-8f00-4b6af6234748">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Calibri" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Nationalité " + "<span style='font-weight: bold;'>" + ($F{nationalite} != null ? $F{nationalite} : "") + " ./.</span>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="202" width="275" height="15" uuid="4b958e10-7ce0-480b-a794-70ad0022a76a">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Calibri" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Profession " + "<span style='font-weight: bold;'>" + ($F{profession} != null ? $F{profession} : "") + " ./.</span>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="226" width="275" height="15" uuid="c5aa23e6-0a09-4c9b-a088-dc64442cb51a">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Calibri" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Domicilié à " + "<span style='font-weight: bold;'>" + ($F{domicile} != null ? $F{domicile} : "") + " ./.</span>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="274" width="275" height="15" uuid="bfe64b69-202f-4cb9-8d3e-ba14378edb8f">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Calibri" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["né(e) le " + "<span style='font-weight: bold;'>" + ($F{dateNaissance} != null ? $F{dateNaissance} : "") + " ./.</span>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="299" width="275" height="15" uuid="4907fb3d-0250-42a7-a7a5-8b1efa7ad4db">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Calibri" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["à " + "<span style='font-weight: bold;'>" + ($F{lieuNaissance} != null ? $F{lieuNaissance} : "") + " ./.</span>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="323" width="275" height="15" uuid="d421e83b-de4a-460f-9092-d5c292b9f075">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Calibri" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Fils(le) de " + "<span style='font-weight: bold;'>" + ($F{pere} != null ? $F{pere} : "") + " ./.</span>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="347" width="275" height="15" uuid="e96762a5-9cf1-4dc5-ab61-836a3f6aed36">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Calibri" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Et de " + "<span style='font-weight: bold;'>" + ($F{mere} != null ? $F{mere} : "") + " ./.</span>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="292" y="434" width="215" height="15" uuid="0d697483-7c5e-4ebc-92b6-4afeef1ce743">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Délivré à " + $F{centre} + " le " + $P{FormatDateScriptlet_SCRIPTLET}.formater(new Date())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="292" y="473" width="215" height="15" uuid="167b46d5-117e-4b4d-874f-57882377a7a8">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<text><![CDATA[L'Officier de l'Etat Civil]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="292" y="488" width="215" height="15" uuid="29fdbc06-05f1-4e89-b08c-d15e69fec5ed">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="8" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[(Signature)]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="292" y="573" width="215" height="15" uuid="2d13e870-8fea-487f-8379-eeef509ae59b">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{officier}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="292" y="586" width="215" height="15" uuid="bfcae9fe-ebee-49cf-be7b-016b9fb94877">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="Calibri" size="10" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{titreOfficier}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement x="25" y="547" width="100" height="49" uuid="4a7ec12a-8b7e-43b2-b468-3612dd8597b8">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement x="1" y="18" width="99" height="15" uuid="478ed5e3-2cad-4762-ab00-173b96bfd80f">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Calibri" size="8"/>
+					</textElement>
+					<text><![CDATA[Timbre Fiscal]]></text>
+				</staticText>
+			</frame>
+			<textField>
+				<reportElement x="239" y="250" width="275" height="15" uuid="b183a6fa-c0c1-43e9-baff-1bd95d161439">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Calibri" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Situation matrimoniale " + "<span style='font-weight: bold;'>" + $F{situationMatrimoniale} + " ./.</span>"]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+				<reportElement x="48" y="21" width="80" height="75" uuid="c55f2883-075e-4acf-9248-33994064c8a9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$F{embleme}]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+</jasperReport>

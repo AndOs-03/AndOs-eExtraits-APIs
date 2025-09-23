@@ -22,7 +22,7 @@
   <properties>
     <java.version>17</java.version>
     <org.springdoc.version>2.8.6</org.springdoc.version>
-    <maven.compiler.verion>3.13.0</maven.compiler.verion>
+    <maven.compiler.version>3.13.0</maven.compiler.version>
 
     <lombok.version>1.18.34</lombok.version>
     <mapstruct.version>1.6.3</mapstruct.version>
@@ -67,6 +67,38 @@
       <version>${org.springdoc.version}</version>
     </dependency>
 
+    <!-- Jasper report -->
+    <dependency>
+      <groupId>net.sf.jasperreports</groupId>
+      <artifactId>jasperreports</artifactId>
+      <version>6.20.0</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.jasperreports</groupId>
+      <artifactId>jasperreports-fonts</artifactId>
+      <version>6.20.0</version>
+    </dependency>
+    <!-- Jasper report -->
+
+    <!--  Font Jasper importé  -->
+    <dependency>
+      <groupId>com.andos.jasperfonts</groupId>
+      <artifactId>jasperfont-calibri</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.andos.jasperfonts</groupId>
+      <artifactId>jasperfont-georgia</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <!--  Font Jasper importé  -->
+
+    <dependency>
+      <groupId>com.ibm.icu</groupId>
+      <artifactId>icu4j</artifactId>
+      <version>76.1</version>
+    </dependency>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -76,10 +108,11 @@
 
   <build>
     <plugins>
+      <!-- Plugin Compiler -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>${maven.compiler.verion}</version>
+        <version>${maven.compiler.version}</version>
         <configuration>
           <source>${java.version}</source>
           <target>${java.version}</target>
@@ -104,5 +137,4 @@
       </plugin>
     </plugins>
   </build>
-
 </project>
