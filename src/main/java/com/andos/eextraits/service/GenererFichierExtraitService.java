@@ -2,6 +2,7 @@ package com.andos.eextraits.service;
 
 import com.andos.eextraits.dto.vm.ExtraitDecesDetailsVM;
 import com.andos.eextraits.dto.vm.ExtraitMariageDetailsVM;
+import com.andos.eextraits.dto.vm.ExtraitNaissanceDetailsVM;
 import java.io.ByteArrayOutputStream;
 
 /**
@@ -14,4 +15,6 @@ public interface GenererFichierExtraitService {
 
   ByteArrayOutputStream extraitMariage(ExtraitMariageDetailsVM extaitVm, Long institutionId,
       Long centreId);
+
+  ByteArrayOutputStream extraitNaissance(ExtraitNaissanceDetailsVM extaitVm, Long institutionId);
 }

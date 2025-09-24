@@ -33,7 +33,7 @@
 	<detail>
 		<band height="636" splitType="Stretch">
 			<staticText>
-				<reportElement x="5" y="3" width="185" height="15" uuid="970376f8-73a6-4761-84f4-eb87e27f4d98">
+				<reportElement x="0" y="3" width="190" height="15" uuid="970376f8-73a6-4761-84f4-eb87e27f4d98">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -86,7 +86,7 @@
 				<textFieldExpression><![CDATA[$F{annee}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="5" y="101" width="178" height="15" uuid="981db363-da1e-4931-a431-590820b18e3a">
+				<reportElement x="0" y="101" width="183" height="15" uuid="981db363-da1e-4931-a431-590820b18e3a">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -98,7 +98,7 @@
 				<text><![CDATA[ETAT CIVIL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="5" y="115" width="178" height="17" uuid="112e0c20-57b1-4a72-a3ef-4275177ebc76">
+				<reportElement x="0" y="115" width="183" height="17" uuid="112e0c20-57b1-4a72-a3ef-4275177ebc76">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -109,7 +109,7 @@
 				<text><![CDATA[-------]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="5" y="125" width="185" height="15" uuid="0257277a-fdcc-4c4c-a91b-17d3fc042482">
+				<reportElement x="0" y="125" width="190" height="15" uuid="0257277a-fdcc-4c4c-a91b-17d3fc042482">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -120,7 +120,7 @@
 				<text><![CDATA[CIRCONSCRIPTION D'ETAT CIVIL]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="5" y="142" width="185" height="15" uuid="e58e5cc5-c9a1-462f-86d6-ded06b9d11f1">
+				<reportElement x="0" y="142" width="190" height="15" uuid="e58e5cc5-c9a1-462f-86d6-ded06b9d11f1">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -131,7 +131,7 @@
 				<textFieldExpression><![CDATA["DE " + $F{etatCivil}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="5" y="160" width="185" height="15" uuid="4d3f2f01-f83c-4fb4-8c5e-cc77b9d1e2bb">
+				<reportElement x="0" y="160" width="190" height="15" uuid="4d3f2f01-f83c-4fb4-8c5e-cc77b9d1e2bb">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -141,7 +141,7 @@
 				<text><![CDATA[CENTRE]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="5" y="178" width="185" height="15" uuid="2554c207-19ab-403d-ad77-7df50ab08560">
+				<reportElement x="0" y="178" width="190" height="15" uuid="2554c207-19ab-403d-ad77-7df50ab08560">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -162,7 +162,7 @@
 				<textFieldExpression><![CDATA["<span style='font-weight: bold;'>Nº " + $F{registre} + "</span>" + ($F{registreN} != null ? " du registre " + $F{registreN} : "")]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="5" y="253" width="185" height="15" uuid="bf154126-2624-4454-b0ed-e6365a0fc36a">
+				<reportElement x="0" y="253" width="190" height="15" uuid="bf154126-2624-4454-b0ed-e6365a0fc36a">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -172,7 +172,7 @@
 				<text><![CDATA[DECES DE]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="5" y="277" width="185" height="15" uuid="ee0842de-0b1d-41c7-9762-4d851a69f289">
+				<reportElement x="0" y="277" width="190" height="15" uuid="ee0842de-0b1d-41c7-9762-4d851a69f289">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -182,7 +182,7 @@
 				<textFieldExpression><![CDATA[$F{nom}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="5" y="297" width="185" height="15" uuid="b4d1d491-cecb-46ce-a262-25f0d19a4a6d">
+				<reportElement x="0" y="297" width="190" height="15" uuid="b4d1d491-cecb-46ce-a262-25f0d19a4a6d">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -394,7 +394,7 @@
 				<textFieldExpression><![CDATA["Situation matrimoniale " + "<span style='font-weight: bold;'>" + $F{situationMatrimoniale} + " ./.</span>"]]></textFieldExpression>
 			</textField>
 			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
-				<reportElement x="48" y="21" width="80" height="75" uuid="c55f2883-075e-4acf-9248-33994064c8a9">
+				<reportElement x="51" y="21" width="80" height="75" uuid="c55f2883-075e-4acf-9248-33994064c8a9">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<imageExpression><![CDATA[$F{embleme}]]></imageExpression>

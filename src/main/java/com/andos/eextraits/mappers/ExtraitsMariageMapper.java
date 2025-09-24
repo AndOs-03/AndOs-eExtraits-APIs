@@ -1,9 +1,7 @@
 package com.andos.eextraits.mappers;
 
 import com.andos.eextraits.dto.objetvaleur.PersonneExtraitMariage;
-import com.andos.eextraits.dto.vm.ExportExtraitDecesVM;
 import com.andos.eextraits.dto.vm.ExportExtraitMariageVM;
-import com.andos.eextraits.dto.vm.ExtraitDecesDetailsVM;
 import com.andos.eextraits.dto.vm.ExtraitMariageDetailsVM;
 import com.andos.eextraits.dto.vm.ExtraitMariageEssentielVM;
 import com.andos.eextraits.entity.ExtraitMariagesTable;
