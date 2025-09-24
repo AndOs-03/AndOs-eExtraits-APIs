@@ -14,21 +14,17 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ExportExtraitDecesVM extends ExportExtraitVM {
 
-  int annee;
-  String registre;
-  String dateDeces;
-  String lieuDeces;
-  String nom;
-  String prenoms;
-  String nationalite;
-  String profession;
-  String domicile;
-  String dateNaissance;
-  String lieuNaissance;
-  String etatCivil;
-  String centreEtatCivil;
-  String registreN;
-  String situationMatrimoniale;
-  String pere;
-  String mere;
+  private int annee;
+  private String dateDeces;
+  private String lieuDeces;
+  private String nom;
+  private String prenoms;
+  private String nationalite;
+  private String profession;
+  private String domicile;
+  private String dateNaissance;
+  private String lieuNaissance;
+  private String situationMatrimoniale;
+  private String pere;
+  private String mere;
 }

@@ -19,4 +19,8 @@ public class ExportExtraitVM {
   private String centre;
   private String officier;
   private String titreOfficier;
+  private String etatCivil;
+  private String centreEtatCivil;
+  private String registre;
+  private String registreN;
 }

@@ -2,9 +2,15 @@ package com.andos.eextraits.service.impl;
 
 import com.andos.eextraits.dto.vm.CentreVM;
 import com.andos.eextraits.dto.vm.ExportExtraitDecesVM;
+import com.andos.eextraits.dto.vm.ExportExtraitMariageVM;
+import com.andos.eextraits.dto.vm.ExportExtraitVM;
 import com.andos.eextraits.dto.vm.ExtraitDecesDetailsVM;
+import com.andos.eextraits.dto.vm.ExtraitMariageDetailsVM;
 import com.andos.eextraits.dto.vm.InstitutionVM;
+import com.andos.eextraits.dto.vm.PersonneExtraitMariageExportVM;
 import com.andos.eextraits.mappers.ExtraitsDecesMapper;
+import com.andos.eextraits.mappers.ExtraitsMariageMapper;
+import com.andos.eextraits.mappers.ExtraitsNaissanceMapper;
 import com.andos.eextraits.service.CentresService;
 import com.andos.eextraits.service.GenererFichierExtraitService;
 import com.andos.eextraits.service.InstitutionsService;
@@ -35,6 +41,8 @@ public class GenererFichierExtraitServiceImpl extends AbstractJasperRapport impl
   private final CentresService centresService;
   private final InstitutionsService institutionsService;
   private final ExtraitsDecesMapper extraitsDecesMapper;
+  private final ExtraitsMariageMapper extraitsMariageMapper;
+  private final ExtraitsNaissanceMapper extraitsNaissanceMapper;
 
   public GenererFichierExtraitServiceImpl(
       CentresService centresService,
@@ -43,6 +51,8 @@ public class GenererFichierExtraitServiceImpl extends AbstractJasperRapport impl
     this.centresService = centresService;
     this.institutionsService = institutionsService;
     this.extraitsDecesMapper = ExtraitsDecesMapper.INSTANCE;
+    this.extraitsMariageMapper = ExtraitsMariageMapper.INSTANCE;
+    this.extraitsNaissanceMapper = ExtraitsNaissanceMapper.INSTANCE;
   }
 
   @Override
@@ -53,11 +63,10 @@ public class GenererFichierExtraitServiceImpl extends AbstractJasperRapport impl
 
     ExportExtraitDecesVM rapport = this.extraitsDecesMapper
         .extraitDecesDetailsVmVersExportExtraitDecesVM(extaitVm);
-    rapport.setCentre(centreVm.nom());
-    rapport.setOfficier(institutionVm.officier());
-    rapport.setTitreOfficier(institutionVm.titreOfficier());
 
+    this.mapperCentreEtInstitution(rapport, centreVm, institutionVm);
     this.assignerSituationMatrimoniale(extaitVm, rapport);
+    this.assignerEmbleme(rapport);
 
     LocalDate dateDeces = extaitVm.dateDeces();
     String dateDecesLettre = this.convertirEnDateLettre(dateDeces);
@@ -66,8 +75,6 @@ public class GenererFichierExtraitServiceImpl extends AbstractJasperRapport impl
     String dateNaissanceLettre = this.convertirEnDateLettre(dateNaissance);
     rapport.setDateNaissance(dateNaissanceLettre);
 
-    this.assignerEmbleme(rapport);
-
     this.initialisation("reporting/JrExtraitDeces.jrxml");
     JRBeanCollectionDataSource jrDatasource = this.genererJRDataSource(rapport);
     this.setDataSource(jrDatasource);
@@ -75,6 +82,47 @@ public class GenererFichierExtraitServiceImpl extends AbstractJasperRapport impl
   }
 
   @Override
+  public ByteArrayOutputStream extraitMariage(ExtraitMariageDetailsVM extaitVm, Long institutionId,
+      Long centreId) {
+    InstitutionVM institutionVm = this.institutionsService.recupererParId(institutionId);
+    CentreVM centreVm = this.centresService.recupererParId(centreId);
+
+    ExportExtraitMariageVM rapport = this.extraitsMariageMapper
+        .extraitMariageDetailsVmVersExportExtraitMariageVM(extaitVm);
+
+    this.mapperCentreEtInstitution(rapport, centreVm, institutionVm);
+    this.assignerEmbleme(rapport);
+
+    LocalDate dateMariage = extaitVm.dateMariage();
+    String dateMariageLettre = this.convertirEnDateLettre(dateMariage);
+    rapport.setDateMariage(dateMariageLettre);
+
+    LocalDate dateNaissanceEpx = extaitVm.epoux().getDateNaissance();
+    String dateNaissanceEpxLettre = this.convertirEnDateLettre(dateNaissanceEpx);
+    PersonneExtraitMariageExportVM epoux = rapport.getEpoux();
+    epoux.setDateNaissance(dateNaissanceEpxLettre);
+
+    LocalDate dateNaissanceEpse = extaitVm.epouse().getDateNaissance();
+    String dateNaissanceEpseLettre = this.convertirEnDateLettre(dateNaissanceEpse);
+    PersonneExtraitMariageExportVM epouse = rapport.getEpouse();
+    epouse.setDateNaissance(dateNaissanceEpseLettre);
+
+    this.initialisation("reporting/JrExtraitMariage.jrxml");
+    JRBeanCollectionDataSource jrDatasource = this.genererJRDataSource(rapport);
+    this.setDataSource(jrDatasource);
+    return this.exporter();
+  }
+
+  private void mapperCentreEtInstitution(
+      ExportExtraitVM rapport,
+      CentreVM centreVm,
+      InstitutionVM institutionVm
+  ) {
+    rapport.setCentre(centreVm.nom());
+    rapport.setOfficier(institutionVm.officier());
+    rapport.setTitreOfficier(institutionVm.titreOfficier());
+  }
+
   public InputStream recupererEmbleme() throws IOException {
     var classPathResource = new ClassPathResource("images/embleme.jpg");
     return classPathResource.getInputStream();
@@ -84,7 +132,11 @@ public class GenererFichierExtraitServiceImpl extends AbstractJasperRapport impl
     return new JRBeanCollectionDataSource(List.of(rapport));
   }
 
-  private void assignerEmbleme(ExportExtraitDecesVM rapport) {
+  private JRBeanCollectionDataSource genererJRDataSource(ExportExtraitMariageVM rapport) {
+    return new JRBeanCollectionDataSource(List.of(rapport));
+  }
+
+  private void assignerEmbleme(ExportExtraitVM rapport) {
     try {
       InputStream embleme = this.recupererEmbleme();
       rapport.setEmbleme(embleme);
