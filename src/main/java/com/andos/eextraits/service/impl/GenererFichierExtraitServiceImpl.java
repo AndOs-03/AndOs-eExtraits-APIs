@@ -122,13 +122,13 @@ public class GenererFichierExtraitServiceImpl extends AbstractJasperRapport impl
 
     if (extaitVm.nouveauModel()) {
       if (extaitVm.extraitTypeTPI()) {
-        // this.initialisation("reporting/JrExtraitNaissanceTPINouveau.jrxml");
+        this.initialisation("reporting/JrExtraitNaissanceTPINouveau.jrxml");
       } else {
-        // this.initialisation("reporting/JrExtraitNaissanceNouveau.jrxml");
+        this.initialisation("reporting/JrExtraitNaissanceNouveau.jrxml");
       }
     } else {
       if (extaitVm.extraitTypeTPI()) {
-        // this.initialisation("reporting/JrExtraitNaissanceTPI.jrxml");
+        this.initialisation("reporting/JrExtraitNaissanceTPI.jrxml");
       } else {
         this.initialisation("reporting/JrExtraitNaissance.jrxml");
       }
