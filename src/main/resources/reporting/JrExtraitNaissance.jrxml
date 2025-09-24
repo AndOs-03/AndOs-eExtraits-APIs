@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="JrExtraitDeces" pageWidth="595" pageHeight="842" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="50" bottomMargin="50" uuid="fa6c4fbd-c8e0-4970-96a5-c23a028ce0d8">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="JrExtraitNaissance" pageWidth="595" pageHeight="842" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="50" bottomMargin="50" uuid="fa6c4fbd-c8e0-4970-96a5-c23a028ce0d8">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<scriptlet name="FormatDateScriptlet" class="com.andos.eextraits.utils.FormaterDateService"/>
 	<queryString>
@@ -9,29 +9,23 @@
 	<field name="embleme" class="java.io.InputStream"/>
 	<field name="annee" class="java.lang.Integer"/>
 	<field name="registre" class="java.lang.String"/>
-	<field name="dateDeces" class="java.lang.String"/>
-	<field name="lieuDeces" class="java.lang.String"/>
-	<field name="nom" class="java.lang.String"/>
-	<field name="prenoms" class="java.lang.String"/>
-	<field name="nationalite" class="java.lang.String"/>
-	<field name="profession" class="java.lang.String"/>
-	<field name="domicile" class="java.lang.String"/>
-	<field name="dateNaissance" class="java.lang.String"/>
-	<field name="lieuNaissance" class="java.lang.String"/>
+	<field name="numeroJugementSupletif" class="java.lang.String"/>
 	<field name="etatCivil" class="java.lang.String"/>
 	<field name="centreEtatCivil" class="java.lang.String"/>
 	<field name="registreN" class="java.lang.String"/>
-	<field name="situationMatrimoniale" class="java.lang.String"/>
-	<field name="pere" class="java.lang.String"/>
-	<field name="mere" class="java.lang.String"/>
 	<field name="centre" class="java.lang.String"/>
 	<field name="officier" class="java.lang.String"/>
 	<field name="titreOfficier" class="java.lang.String"/>
+	<field name="dateJugementSupletif" class="java.time.LocalDate"/>
+	<field name="tribunalJugementSupletif" class="java.lang.String"/>
+	<field name="extraitTypeTPI" class="java.lang.Boolean"/>
+	<field name="nouveauModel" class="java.lang.String"/>
+	<field name="personne" class="com.andos.eextraits.dto.vm.PersonneExtraitNaissanceExportVM"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="636" splitType="Stretch">
+		<band height="742" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="3" width="190" height="15" uuid="970376f8-73a6-4761-84f4-eb87e27f4d98">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -151,7 +145,7 @@
 				<textFieldExpression><![CDATA["DE " + $F{centreEtatCivil}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="223" width="220" height="15" uuid="0c3951d9-e5df-4b0a-a43c-224b0df0cb68">
+				<reportElement x="0" y="214" width="220" height="15" uuid="0c3951d9-e5df-4b0a-a43c-224b0df0cb68">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -162,34 +156,34 @@
 				<textFieldExpression><![CDATA["<span style='font-weight: bold;'>Nº " + $F{registre} + "</span>" + ($F{registreN} != null ? " du registre " + $F{registreN} : "")]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="253" width="190" height="15" uuid="bf154126-2624-4454-b0ed-e6365a0fc36a">
+				<reportElement x="0" y="244" width="190" height="15" uuid="bf154126-2624-4454-b0ed-e6365a0fc36a">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Calibri" size="12"/>
 				</textElement>
-				<text><![CDATA[DECES DE]]></text>
+				<text><![CDATA[NAISSANCE DE]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="0" y="277" width="190" height="15" uuid="ee0842de-0b1d-41c7-9762-4d851a69f289">
+				<reportElement x="0" y="268" width="190" height="15" uuid="ee0842de-0b1d-41c7-9762-4d851a69f289">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Calibri" size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nom}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{personne}.getNom()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="297" width="190" height="15" uuid="b4d1d491-cecb-46ce-a262-25f0d19a4a6d">
+				<reportElement x="0" y="285" width="190" height="15" uuid="b4d1d491-cecb-46ce-a262-25f0d19a4a6d">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Calibri" size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{prenoms} + " ./."]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{personne}.getPrenoms() + " ./."]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="239" y="101" width="275" height="15" uuid="8ff32bec-ed96-40cc-9da6-d80fe40f91e6">
@@ -201,7 +195,7 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
 					<font fontName="Calibri" size="12" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Le " + "<span style='font-weight: bold;'>" + ($F{dateDeces} != null ? $F{dateDeces} : "") + " ./.</span>"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Le " + "<span style='font-weight: bold;'>" + $F{personne}.getDateNaissance() + " ./.</span>"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="239" y="126" width="275" height="15" uuid="56cb9099-9ee6-48ad-aeed-50c6003781c0">
@@ -213,7 +207,7 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
 					<font fontName="Calibri" size="12" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA["à " + "<span style='font-weight: bold;'>" + ($F{lieuDeces} != null ? $F{lieuDeces} : "") + " ./.</span>"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["est né " + "<span style='font-weight: bold;'>" + $F{personne}.getPrenoms() + " ./.</span>"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="239" y="152" width="275" height="15" uuid="c1a982d7-045d-4eff-8b8e-d293cb2d2640">
@@ -225,7 +219,7 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
 					<font fontName="Calibri" size="12" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA["est décédé(e) " + "<span style='font-weight: bold;'>" + $F{prenoms} + " ./.</span>"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["à " + "<span style='font-weight: bold;'>" + $F{personne}.getLieuNaissance() + " ./.</span>"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="239" y="177" width="275" height="15" uuid="d305d3a6-26d3-4cea-8f00-4b6af6234748">
@@ -237,7 +231,7 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
 					<font fontName="Calibri" size="12" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Nationalité " + "<span style='font-weight: bold;'>" + ($F{nationalite} != null ? $F{nationalite} : "") + " ./.</span>"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Fils de " + "<span style='font-weight: bold;'>" + $F{personne}.getPere() + " ./.</span>"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="239" y="202" width="275" height="15" uuid="4b958e10-7ce0-480b-a794-70ad0022a76a">
@@ -249,68 +243,10 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
 					<font fontName="Calibri" size="12" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Profession " + "<span style='font-weight: bold;'>" + ($F{profession} != null ? $F{profession} : "") + " ./.</span>"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["et de " + "<span style='font-weight: bold;'>" + $F{personne}.getMere() + " ./.</span>"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="239" y="226" width="275" height="15" uuid="c5aa23e6-0a09-4c9b-a088-dc64442cb51a">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
-					<font fontName="Calibri" size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Domicilié à " + "<span style='font-weight: bold;'>" + ($F{domicile} != null ? $F{domicile} : "") + " ./.</span>"]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="239" y="274" width="275" height="15" uuid="bfe64b69-202f-4cb9-8d3e-ba14378edb8f">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
-					<font fontName="Calibri" size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA["né(e) le " + "<span style='font-weight: bold;'>" + ($F{dateNaissance} != null ? $F{dateNaissance} : "") + " ./.</span>"]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="239" y="299" width="275" height="15" uuid="4907fb3d-0250-42a7-a7a5-8b1efa7ad4db">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
-					<font fontName="Calibri" size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA["à " + "<span style='font-weight: bold;'>" + ($F{lieuNaissance} != null ? $F{lieuNaissance} : "") + " ./.</span>"]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="239" y="323" width="275" height="15" uuid="d421e83b-de4a-460f-9092-d5c292b9f075">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
-					<font fontName="Calibri" size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Fils(le) de " + "<span style='font-weight: bold;'>" + ($F{pere} != null ? $F{pere} : "") + " ./.</span>"]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="239" y="347" width="275" height="15" uuid="e96762a5-9cf1-4dc5-ab61-836a3f6aed36">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
-					<font fontName="Calibri" size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Et de " + "<span style='font-weight: bold;'>" + ($F{mere} != null ? $F{mere} : "") + " ./.</span>"]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="292" y="434" width="215" height="15" uuid="0d697483-7c5e-4ebc-92b6-4afeef1ce743">
+				<reportElement x="292" y="574" width="215" height="15" uuid="0d697483-7c5e-4ebc-92b6-4afeef1ce743">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -320,7 +256,7 @@
 				<textFieldExpression><![CDATA["Délivré à " + $F{centre} + " le " + $P{FormatDateScriptlet_SCRIPTLET}.formater(new Date())]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="292" y="473" width="215" height="15" uuid="167b46d5-117e-4b4d-874f-57882377a7a8">
+				<reportElement x="292" y="613" width="215" height="15" uuid="167b46d5-117e-4b4d-874f-57882377a7a8">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -330,7 +266,7 @@
 				<text><![CDATA[L'Officier de l'Etat Civil]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="292" y="488" width="215" height="15" uuid="29fdbc06-05f1-4e89-b08c-d15e69fec5ed">
+				<reportElement x="292" y="628" width="215" height="15" uuid="29fdbc06-05f1-4e89-b08c-d15e69fec5ed">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -340,7 +276,7 @@
 				<text><![CDATA[(Signature)]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="292" y="573" width="215" height="15" uuid="2d13e870-8fea-487f-8379-eeef509ae59b">
+				<reportElement x="292" y="713" width="215" height="15" uuid="2d13e870-8fea-487f-8379-eeef509ae59b">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -351,7 +287,7 @@
 				<textFieldExpression><![CDATA[$F{officier}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="292" y="586" width="215" height="15" uuid="bfcae9fe-ebee-49cf-be7b-016b9fb94877">
+				<reportElement x="292" y="726" width="215" height="15" uuid="bfcae9fe-ebee-49cf-be7b-016b9fb94877">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -361,7 +297,7 @@
 				<textFieldExpression><![CDATA[$F{titreOfficier}]]></textFieldExpression>
 			</textField>
 			<frame>
-				<reportElement x="25" y="547" width="100" height="49" uuid="4a7ec12a-8b7e-43b2-b468-3612dd8597b8">
+				<reportElement x="25" y="687" width="100" height="49" uuid="4a7ec12a-8b7e-43b2-b468-3612dd8597b8">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -376,13 +312,61 @@
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Calibri" size="8"/>
+						<font fontName="Calibri" size="8" isBold="false"/>
 					</textElement>
 					<text><![CDATA[Timbre Fiscal]]></text>
 				</staticText>
 			</frame>
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+				<reportElement x="51" y="21" width="80" height="75" uuid="c55f2883-075e-4acf-9248-33994064c8a9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$F{embleme}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="58" y="517" width="454" height="15" uuid="f9747167-bf86-45e7-ac7f-b603cb5ece67">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<text><![CDATA[Certifié le présent extrait conforme aux indications portées au registre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="704" width="90" height="15" uuid="9e165fac-d74e-480b-add7-86b3e42496de">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Sceau]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="380" width="125" height="30" uuid="b664f59c-2a50-48ef-8d9c-f206e1c339e3">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Calibri" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[M E N T I O N S]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="264" y="380" width="116" height="30" uuid="f4d81856-067d-4d53-9ac5-e9398030ae69">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Calibri" size="16" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(éventuellement) :]]></text>
+			</staticText>
 			<textField>
-				<reportElement x="239" y="250" width="275" height="15" uuid="b183a6fa-c0c1-43e9-baff-1bd95d161439">
+				<reportElement x="0" y="419" width="250" height="15" uuid="8ab1baae-5325-4612-b64e-13d788946443">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -391,14 +375,68 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
 					<font fontName="Calibri" size="12" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Situation matrimoniale " + "<span style='font-weight: bold;'>" + $F{situationMatrimoniale} + " ./.</span>"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Marié le" + "&nbsp;&nbsp;&nbsp;" + "<span style='font-weight: bold;'>" + ($F{personne}.getMentionsEventuelle().getMariage() == true ? $F{personne}.getMentionsEventuelle().getDateMariage() : "&nbsp;&nbsp;&nbsp;" + "Néant") + " ./.</span>"]]></textFieldExpression>
 			</textField>
-			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
-				<reportElement x="51" y="21" width="80" height="75" uuid="c55f2883-075e-4acf-9248-33994064c8a9">
+			<textField>
+				<reportElement x="265" y="419" width="250" height="15" uuid="e38cdbe0-58fc-4748-9aaf-ae5a7b60445a">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<imageExpression><![CDATA[$F{embleme}]]></imageExpression>
-			</image>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Calibri" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["à" + "&nbsp;&nbsp;&nbsp;" + "<span style='font-weight: bold;'>" + ($F{personne}.getMentionsEventuelle().getMariage() == true ? $F{personne}.getMentionsEventuelle().getLieuMariage() : "&nbsp;&nbsp;&nbsp;" + "Néant") + " ./.</span>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="440" width="515" height="15" uuid="438b6c79-7508-4dd9-ba53-96ea18b5171b">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Calibri" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Avec" + "&nbsp;&nbsp;&nbsp;" + "<span style='font-weight: bold;'>" + ($F{personne}.getMentionsEventuelle().getMariage() == true ? $F{personne}.getMentionsEventuelle().getEpouOuEpouse() : "&nbsp;&nbsp;&nbsp;" + "Néant") + " ./.</span>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="461" width="515" height="15" uuid="932f47c8-e25b-4790-bc71-0757bb98584b">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Calibri" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Mariage dissous par décision de divorce en date du" + "&nbsp;&nbsp;&nbsp;" + "<span style='font-weight: bold;'>" + ($F{personne}.getMentionsEventuelle().getDivorce() == true ? $F{personne}.getMentionsEventuelle().getDateDivorce() : "&nbsp;&nbsp;&nbsp;" + "Néant") + " ./.</span>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="482" width="250" height="15" uuid="b5585d1e-8003-48b2-8d1b-9ac86434bd61">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Calibri" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Décédé le" + "&nbsp;&nbsp;&nbsp;" + "<span style='font-weight: bold;'>" + ($F{personne}.getMentionsEventuelle().getDecede() == true ? $F{personne}.getMentionsEventuelle().getDateDeces() : "&nbsp;&nbsp;&nbsp;" + "Néant") + " ./.</span>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="265" y="482" width="250" height="15" uuid="85e0ba3f-6dc3-4461-bce3-e1fc8f5c07d2">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Calibri" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["à" + "&nbsp;&nbsp;&nbsp;" + "<span style='font-weight: bold;'>" + ($F{personne}.getMentionsEventuelle().getDecede() == true ? $F{personne}.getMentionsEventuelle().getLieuDeces() : "&nbsp;&nbsp;&nbsp;" + "Néant") + " ./.</span>"]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 </jasperReport>

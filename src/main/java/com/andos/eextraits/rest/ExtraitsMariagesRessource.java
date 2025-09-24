@@ -5,9 +5,15 @@ import com.andos.eextraits.dto.commande.ModifierExtraitMariageCommande;
 import com.andos.eextraits.dto.vm.ExtraitMariageDetailsVM;
 import com.andos.eextraits.dto.vm.ExtraitMariageEssentielVM;
 import com.andos.eextraits.service.ExtraitsMariagesService;
+import com.andos.eextraits.service.GenererFichierExtraitService;
 import jakarta.validation.Valid;
+import java.io.ByteArrayOutputStream;
 import java.util.List;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,9 +34,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class ExtraitsMariagesRessource {
 
   private final ExtraitsMariagesService extraitsMariagesService;
+  private final GenererFichierExtraitService genererFichierExtraitService;
 
-  public ExtraitsMariagesRessource(ExtraitsMariagesService extraitsMariagesService) {
+  public ExtraitsMariagesRessource(
+      ExtraitsMariagesService extraitsMariagesService,
+      GenererFichierExtraitService genererFichierExtraitService
+  ) {
     this.extraitsMariagesService = extraitsMariagesService;
+    this.genererFichierExtraitService = genererFichierExtraitService;
   }
 
   @PostMapping
@@ -71,5 +82,27 @@ public class ExtraitsMariagesRessource {
   public ResponseEntity<List<ExtraitMariageEssentielVM>> lister() {
     List<ExtraitMariageEssentielVM> extraitVms = this.extraitsMariagesService.lister();
     return new ResponseEntity<>(extraitVms, HttpStatus.OK);
+  }
+
+  @GetMapping("/{id}/generer-fichier-extrait")
+  @ResponseStatus(HttpStatus.OK)
+  public ResponseEntity<Resource> genererFichierExtrait(
+      @PathVariable Long id,
+      @RequestParam("institutionId") Long institutionId,
+      @RequestParam("centreId") Long centreId
+  ) {
+    ExtraitMariageDetailsVM extaitVm = this.extraitsMariagesService.recupererParId(id);
+    ByteArrayOutputStream byteArray = this.genererFichierExtraitService.extraitMariage(extaitVm,
+        institutionId, centreId);
+
+    byte[] bytes = byteArray.toByteArray();
+    ByteArrayResource byteArrayResource = new ByteArrayResource(bytes);
+    String nomPrenoms = extaitVm.epoux().getNomPrenoms();
+    String nomFichier = "extrait - mariage - " + nomPrenoms + ".pdf";
+
+    return ResponseEntity.ok()
+        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + nomFichier)
+        .contentType(MediaType.APPLICATION_PDF)
+        .body(byteArrayResource);
   }
 }

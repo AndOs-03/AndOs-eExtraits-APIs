@@ -1,6 +1,7 @@
 package com.andos.eextraits.mappers;
 
 import com.andos.eextraits.dto.objetvaleur.PersonneExtraitMariage;
+import com.andos.eextraits.dto.vm.ExportExtraitMariageVM;
 import com.andos.eextraits.dto.vm.ExtraitMariageDetailsVM;
 import com.andos.eextraits.dto.vm.ExtraitMariageEssentielVM;
 import com.andos.eextraits.entity.ExtraitMariagesTable;
@@ -30,4 +31,18 @@ public abstract class ExtraitsMariageMapper {
   @Mapping(target = "id", ignore = true)
   public abstract PersonneExtraitMariageTable personneExtraitMariageVersPersonneExtraitMariageTable(
       PersonneExtraitMariage personneExtraitMariage);
+
+  @Mapping(target = "titreOfficier", ignore = true)
+  @Mapping(target = "officier", ignore = true)
+  @Mapping(target = "centre", ignore = true)
+  @Mapping(target = "embleme", ignore = true)
+  @Mapping(target = "epoux.dateNaissance", ignore = true)
+  @Mapping(target = "epouse.dateNaissance", ignore = true)
+  @Mapping(target = "dateMariage", ignore = true)
+  @Mapping(target = "epoux.pere", source = "epoux.pere.nomPrenoms")
+  @Mapping(target = "epoux.mere", source = "epoux.mere.nomPrenoms")
+  @Mapping(target = "epouse.pere", source = "epouse.pere.nomPrenoms")
+  @Mapping(target = "epouse.mere", source = "epouse.mere.nomPrenoms")
+  public abstract ExportExtraitMariageVM extraitMariageDetailsVmVersExportExtraitMariageVM(
+      ExtraitMariageDetailsVM extraitMariageDetailsVm);
 }

@@ -6,25 +6,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * @author Anderson Ouattara 2025-09-22
+ * <p>Regroupe les informations personnelles d'une personne morale sur son extrait de
+ * naissance.</p>
+ *
+ * @author Anderson Ouattara 2025-09-24
  */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExportExtraitDecesVM extends ExportExtraitVM {
+public class PersonneExtraitNaissanceExportVM {
 
-  private int annee;
-  private String dateDeces;
-  private String lieuDeces;
   private String nom;
   private String prenoms;
-  private String nationalite;
-  private String profession;
-  private String domicile;
   private String dateNaissance;
   private String lieuNaissance;
-  private String situationMatrimoniale;
+  private MentionsEventuelleExportVM mentionsEventuelle;
   private String pere;
   private String mere;
 }

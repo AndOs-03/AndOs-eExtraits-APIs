@@ -5,9 +5,15 @@ import com.andos.eextraits.dto.commande.ModifierExtraitNaissanceCommande;
 import com.andos.eextraits.dto.vm.ExtraitNaissanceDetailsVM;
 import com.andos.eextraits.dto.vm.ExtraitNaissanceEssentielVM;
 import com.andos.eextraits.service.ExtraitsNaissancesService;
+import com.andos.eextraits.service.GenererFichierExtraitService;
 import jakarta.validation.Valid;
+import java.io.ByteArrayOutputStream;
 import java.util.List;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,9 +34,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class ExtraitsNaissancesRessource {
 
   private final ExtraitsNaissancesService extraitsNaissancesService;
+  private final GenererFichierExtraitService genererFichierExtraitService;
 
-  public ExtraitsNaissancesRessource(ExtraitsNaissancesService extraitsNaissancesService) {
+  public ExtraitsNaissancesRessource(
+      ExtraitsNaissancesService extraitsNaissancesService,
+      GenererFichierExtraitService genererFichierExtraitService
+  ) {
     this.extraitsNaissancesService = extraitsNaissancesService;
+    this.genererFichierExtraitService = genererFichierExtraitService;
   }
 
   @PostMapping
@@ -81,5 +92,26 @@ public class ExtraitsNaissancesRessource {
       @PathVariable("centreId") Long centreId) {
     List<ExtraitNaissanceEssentielVM> extraitVms = this.extraitsNaissancesService.lister(centreId);
     return new ResponseEntity<>(extraitVms, HttpStatus.OK);
+  }
+
+  @GetMapping("/{id}/generer-fichier-extrait")
+  @ResponseStatus(HttpStatus.OK)
+  public ResponseEntity<Resource> genererFichierExtrait(
+      @PathVariable Long id,
+      @RequestParam("institutionId") Long institutionId
+  ) {
+    ExtraitNaissanceDetailsVM extaitVm = this.extraitsNaissancesService.recupererParId(id);
+    ByteArrayOutputStream byteArray = this.genererFichierExtraitService.extraitNaissance(extaitVm,
+        institutionId);
+
+    byte[] bytes = byteArray.toByteArray();
+    ByteArrayResource byteArrayResource = new ByteArrayResource(bytes);
+    String nomPrenoms = extaitVm.personne().getNom() + " " + extaitVm.personne().getPrenoms();
+    String nomFichier = "extrait - naissance - " + nomPrenoms + ".pdf";
+
+    return ResponseEntity.ok()
+        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + nomFichier)
+        .contentType(MediaType.APPLICATION_PDF)
+        .body(byteArrayResource);
   }
 }

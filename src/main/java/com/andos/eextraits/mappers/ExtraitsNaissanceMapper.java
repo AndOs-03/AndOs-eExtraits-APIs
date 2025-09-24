@@ -2,8 +2,11 @@ package com.andos.eextraits.mappers;
 
 import com.andos.eextraits.dto.objetvaleur.MentionsEventuelle;
 import com.andos.eextraits.dto.objetvaleur.PersonneExtraitNaissance;
+import com.andos.eextraits.dto.vm.ExportExtraitNaissanceVM;
 import com.andos.eextraits.dto.vm.ExtraitNaissanceDetailsVM;
 import com.andos.eextraits.dto.vm.ExtraitNaissanceEssentielVM;
+import com.andos.eextraits.dto.vm.MentionsEventuelleExportVM;
+import com.andos.eextraits.dto.vm.PersonneExtraitNaissanceExportVM;
 import com.andos.eextraits.entity.ExtraitNaissancesTable;
 import com.andos.eextraits.entity.PersonneExtraitNaissanceTable;
 import java.util.Objects;
@@ -37,6 +40,25 @@ public abstract class ExtraitsNaissanceMapper {
   @Mapping(target = "id", ignore = true)
   @Mapping(target = "mentionsEventuelle", expression = "java(mapperMentionEventuelle(personneExtraitNaissance.getMentionsEventuelle()))")
   public abstract PersonneExtraitNaissanceTable personneExtraitNaissanceVersPersonneExtraitNaissanceTable(
+      PersonneExtraitNaissance personneExtraitNaissance);
+
+  @Mapping(target = "titreOfficier", ignore = true)
+  @Mapping(target = "officier", ignore = true)
+  @Mapping(target = "centre", ignore = true)
+  @Mapping(target = "embleme", ignore = true)
+  public abstract ExportExtraitNaissanceVM extraitNaissanceDetailsVmVersExportExtraitNaissanceVM(
+      ExtraitNaissanceDetailsVM extraitNaissanceDetailsVm);
+
+  @Mapping(target = "dateMariage", ignore = true)
+  @Mapping(target = "dateDivorce", ignore = true)
+  @Mapping(target = "dateDeces", ignore = true)
+  public abstract MentionsEventuelleExportVM mentionsEventuelleVersMentionsEventuelleExportVM(
+      MentionsEventuelle mentionsEventuelle);
+
+  @Mapping(target = "dateNaissance", ignore = true)
+  @Mapping(target = "pere", source = "pere.nomPrenoms")
+  @Mapping(target = "mere", source = "mere.nomPrenoms")
+  public abstract PersonneExtraitNaissanceExportVM personneExtraitNaissanceVersPersonneExtraitNaissanceExportVM(
       PersonneExtraitNaissance personneExtraitNaissance);
 
   public MentionsEventuelle mapperMentionEventuelle(MentionsEventuelle mentionsEventuelle) {
