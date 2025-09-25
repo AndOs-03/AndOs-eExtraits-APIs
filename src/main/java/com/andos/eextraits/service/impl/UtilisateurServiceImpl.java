@@ -3,8 +3,10 @@ package com.andos.eextraits.service.impl;
 import com.andos.eextraits.dto.commande.ConnexionCommande;
 import com.andos.eextraits.dto.commande.CreerUtilisateurCommande;
 import com.andos.eextraits.dto.vm.JwtToken;
+import com.andos.eextraits.dto.vm.UtilisateurVM;
 import com.andos.eextraits.entity.UtilisateurTable;
 import com.andos.eextraits.exception.AndOsEExtraitFunctionnalException;
+import com.andos.eextraits.exception.ObjetNonTrouveException;
 import com.andos.eextraits.repository.JpaUtilisateurRepository;
 import com.andos.eextraits.service.UtilisateurService;
 import com.andos.eextraits.utils.JwtService;
@@ -14,7 +16,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -26,13 +28,13 @@ public class UtilisateurServiceImpl implements UtilisateurService {
   private final Logger logger = Logger.getLogger(this.getClass().getName());
 
   private final JpaUtilisateurRepository jpaUtilisateurRepository;
-  private final PasswordEncoder passwordEncoder;
+  private final BCryptPasswordEncoder passwordEncoder;
   private final AuthenticationManagerBuilder authenticationManagerBuilder;
   private final JwtService jwtService;
 
   public UtilisateurServiceImpl(
       JpaUtilisateurRepository jpaUtilisateurRepository,
-      PasswordEncoder passwordEncoder,
+      BCryptPasswordEncoder passwordEncoder,
       AuthenticationManagerBuilder authenticationManagerBuilder,
       JwtService jwtService
   ) {
@@ -70,8 +72,13 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     String motPasse = commande.motPasse();
     var authenticationToken = new UsernamePasswordAuthenticationToken(userName, motPasse);
     AuthenticationManager authenticationManager = authenticationManagerBuilder.getObject();
-    Authentication authentication = authenticationManager.authenticate(authenticationToken);
-    SecurityContextHolder.getContext().setAuthentication(authentication);
+
+    try {
+      Authentication authentication = authenticationManager.authenticate(authenticationToken);
+      SecurityContextHolder.getContext().setAuthentication(authentication);
+    } catch (Exception e) {
+      throw new AndOsEExtraitFunctionnalException(e.getMessage());
+    }
 
     String token = jwtService.genererToken(utilisateurTable);
     String nomComplet = utilisateurTable.nomComplet();
@@ -80,5 +87,18 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     jwtToken.setUserId(utilisateurTable.getId());
     logger.info("Connexion de l'utilisateur : " + userName);
     return jwtToken;
+  }
+
+  @Override
+  public UtilisateurVM utilisateurParUserName(String username) {
+    UtilisateurTable utilisateur = this.jpaUtilisateurRepository.findByNomUtilisateur(username)
+        .orElseThrow(() -> new ObjetNonTrouveException("Utilisateur non trouvé !"));
+    return new UtilisateurVM(
+        utilisateur.getId(),
+        utilisateur.getNom(),
+        utilisateur.getPrenom(),
+        utilisateur.getNomUtilisateur(),
+        utilisateur.getEmail()
+    );
   }
 }
