@@ -2,9 +2,11 @@ package com.andos.eextraits.rest;
 
 import com.andos.eextraits.dto.commande.ConnexionCommande;
 import com.andos.eextraits.dto.commande.CreerUtilisateurCommande;
+import com.andos.eextraits.dto.vm.JwtToken;
 import com.andos.eextraits.service.UtilisateurService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +34,8 @@ public class AuthController {
 
   @PostMapping("/login")
   @ResponseStatus(HttpStatus.OK)
-  public String login(@Valid @RequestBody ConnexionCommande commande) {
-    return this.utilisateurService.connexion(commande);
+  public ResponseEntity<JwtToken> login(@Valid @RequestBody ConnexionCommande commande) {
+    JwtToken token = this.utilisateurService.connexion(commande);
+    return ResponseEntity.ok(token);
   }
 }

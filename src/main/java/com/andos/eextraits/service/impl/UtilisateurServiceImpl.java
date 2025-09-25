@@ -2,15 +2,18 @@ package com.andos.eextraits.service.impl;
 
 import com.andos.eextraits.dto.commande.ConnexionCommande;
 import com.andos.eextraits.dto.commande.CreerUtilisateurCommande;
+import com.andos.eextraits.dto.vm.JwtToken;
 import com.andos.eextraits.entity.UtilisateurTable;
 import com.andos.eextraits.exception.AndOsEExtraitFunctionnalException;
 import com.andos.eextraits.repository.JpaUtilisateurRepository;
 import com.andos.eextraits.service.UtilisateurService;
 import com.andos.eextraits.utils.JwtService;
+import java.util.logging.Logger;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,20 +23,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class UtilisateurServiceImpl implements UtilisateurService {
 
+  private final Logger logger = Logger.getLogger(this.getClass().getName());
+
   private final JpaUtilisateurRepository jpaUtilisateurRepository;
   private final PasswordEncoder passwordEncoder;
-  private final AuthenticationManager authenticationManager;
+  private final AuthenticationManagerBuilder authenticationManagerBuilder;
   private final JwtService jwtService;
 
   public UtilisateurServiceImpl(
       JpaUtilisateurRepository jpaUtilisateurRepository,
       PasswordEncoder passwordEncoder,
-      AuthenticationManager authenticationManager,
+      AuthenticationManagerBuilder authenticationManagerBuilder,
       JwtService jwtService
   ) {
     this.jpaUtilisateurRepository = jpaUtilisateurRepository;
     this.passwordEncoder = passwordEncoder;
-    this.authenticationManager = authenticationManager;
+    this.authenticationManagerBuilder = authenticationManagerBuilder;
     this.jwtService = jwtService;
   }
 
@@ -48,16 +53,32 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     var utilisateurTable = new UtilisateurTable();
     utilisateurTable.setNomUtilisateur(userName);
     utilisateurTable.setMotPasse(passwordEncoder.encode(commande.motPasse()));
+    utilisateurTable.setNom(commande.nom());
+    utilisateurTable.setPrenom(commande.prenom());
+    utilisateurTable.setEmail(commande.email());
     this.jpaUtilisateurRepository.save(utilisateurTable);
+    logger.info("Compte utilisateur créer pour : " + userName);
   }
 
   @Override
-  public String connexion(ConnexionCommande commande) {
+  public JwtToken connexion(ConnexionCommande commande) {
     String userName = commande.nomUtilisateur();
-    Authentication auth = authenticationManager.authenticate(
-        new UsernamePasswordAuthenticationToken(userName, commande.motPasse())
-    );
-    UserDetails userDetails = (UserDetails) auth.getPrincipal();
-    return jwtService.genererToken(userDetails);
+    UtilisateurTable utilisateurTable = this.jpaUtilisateurRepository.findByNomUtilisateur(userName)
+        .orElseThrow(() -> new AndOsEExtraitFunctionnalException("Email ou mot de passe incorrect"
+            + " !"));
+
+    String motPasse = commande.motPasse();
+    var authenticationToken = new UsernamePasswordAuthenticationToken(userName, motPasse);
+    AuthenticationManager authenticationManager = authenticationManagerBuilder.getObject();
+    Authentication authentication = authenticationManager.authenticate(authenticationToken);
+    SecurityContextHolder.getContext().setAuthentication(authentication);
+
+    String token = jwtService.genererToken(utilisateurTable);
+    String nomComplet = utilisateurTable.nomComplet();
+
+    JwtToken jwtToken = new JwtToken(token, userName, nomComplet);
+    jwtToken.setUserId(utilisateurTable.getId());
+    logger.info("Connexion de l'utilisateur : " + userName);
+    return jwtToken;
   }
 }
