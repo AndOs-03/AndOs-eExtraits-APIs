@@ -48,6 +48,7 @@ public class ExtraitsMariagesServiceImpl implements ExtraitsMariagesService {
     ExtraitMariagesTable extraitTable = this.genererExtraitMariagesTable(commande, nouveauRegistre,
         null);
     this.jpaExtraitsMariagesRepository.save(extraitTable);
+    logger.info("Création d'un extrait de mariage REGISTRE : " + nouveauRegistre);
   }
 
   @Override
@@ -66,12 +67,14 @@ public class ExtraitsMariagesServiceImpl implements ExtraitsMariagesService {
     extraitTable = this.genererExtraitMariagesTable(commande, nouveauRegistre, extraitTable);
     extraitTable.setId(commande.getId());
     this.jpaExtraitsMariagesRepository.save(extraitTable);
+    logger.info("Modification d'un extrait de mariage REGISTRE : " + nouveauRegistre);
   }
 
   @Override
   public void supprimer(Long id) {
     try {
       this.jpaExtraitsMariagesRepository.deleteById(id);
+      logger.info("Suppression d'un extrait de mariage ID : " + id);
     } catch (Exception e) {
       logger.info("###    ERREUR SUPPRESSION EXTRAIT MARIAGE   \n" + e.getMessage());
       throw new AndOsEExtraitFunctionnalException("Impossible de supprimer cet extrait de mariage "

@@ -57,6 +57,7 @@ public class ExtraitsNaissancesServiceImpl implements ExtraitsNaissancesService 
     ExtraitNaissancesTable extraitTable = this.genererExtraitNaissancesTable(commande,
         nouveauRegistre, null);
     this.jpaExtraitsNaissancesRepository.save(extraitTable);
+    logger.info("Création d'un extrait de naissance REGISTRE : " + nouveauRegistre);
   }
 
   @Override
@@ -76,12 +77,14 @@ public class ExtraitsNaissancesServiceImpl implements ExtraitsNaissancesService 
     extraitTable = this.genererExtraitNaissancesTable(commande, nouveauRegistre, extraitTable);
     extraitTable.setId(commande.getId());
     this.jpaExtraitsNaissancesRepository.save(extraitTable);
+    logger.info("Modification d'un extrait de naissance REGISTRE : " + nouveauRegistre);
   }
 
   @Override
   public void supprimer(Long id) {
     try {
       this.jpaExtraitsNaissancesRepository.deleteById(id);
+      logger.info("Suppression d'un extrait de naissance ID : " + id);
     } catch (Exception e) {
       logger.info("###    ERREUR SUPPRESSION EXTRAIT NAISSANCE   \n" + e.getMessage());
       throw new AndOsEExtraitFunctionnalException("Impossible de supprimer cet extrait de "

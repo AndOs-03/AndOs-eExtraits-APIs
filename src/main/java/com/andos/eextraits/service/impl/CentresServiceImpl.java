@@ -31,12 +31,14 @@ public class CentresServiceImpl implements CentresService {
   public void creer(CreerCentreCommande commande) {
     boolean existe = this.jpaCentresRepository.existsByNom(commande.nom());
     if (existe) {
+      logger.info("Un centre existe déjà avec ce nom : " + commande.nom());
       throw new AndOsEExtraitFunctionnalException("Un centre existe déjà avec ce nom !");
     }
 
     CentresTable centresTable = new CentresTable();
     centresTable.setNom(commande.nom());
     this.jpaCentresRepository.save(centresTable);
+    logger.info("Création d'un nouveau centre : " + centresTable.getNom());
   }
 
   @Override
@@ -46,17 +48,20 @@ public class CentresServiceImpl implements CentresService {
 
     boolean existe = this.jpaCentresRepository.existsByNom(commande.nom());
     if (existe && !Objects.equals(commande.nom(), centresTable.getNom())) {
+      logger.info("Un centre existe déjà avec ce nom : " + centresTable.getNom());
       throw new AndOsEExtraitFunctionnalException("Un centre existe déjà avec ce nom !");
     }
 
     centresTable.setNom(commande.nom());
     this.jpaCentresRepository.save(centresTable);
+    logger.info("Modification d'un centre : " + centresTable.getNom());
   }
 
   @Override
   public void supprimer(Long id) {
     try {
       this.jpaCentresRepository.deleteById(id);
+      logger.info("Un centre a été supprimé ID : " + id);
     } catch (Exception e) {
       logger.info("###    ERREUR SUPPRESSION CENTRE   \n" + e.getMessage());
       throw new AndOsEExtraitFunctionnalException("Impossible de supprimer ce centre !");
