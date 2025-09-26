@@ -39,6 +39,7 @@ public class ExtraitsDecesServiceImpl implements ExtraitsDecesService {
     String nouveauRegistre = this.genererNouveauRegistre(commande);
     boolean existe = this.jpaExtraitsDecesRepository.existsByRegistre(nouveauRegistre);
     if (existe) {
+      logger.info("Un extrait de décès existe déjà avec ce registre : " + nouveauRegistre);
       throw new AndOsEExtraitFunctionnalException("Un extrait de décès existe déjà avec ce "
           + "registre !");
     }
@@ -50,6 +51,8 @@ public class ExtraitsDecesServiceImpl implements ExtraitsDecesService {
 
     ExtraitDecesTable extraitDecesTable = this.genererExtraitDecesTable(commande, nouveauRegistre);
     this.jpaExtraitsDecesRepository.save(extraitDecesTable);
+    logger.info("Création d'un extrait de décès : " + extraitDecesTable.getNom() + " "
+        + extraitDecesTable.getPrenoms());
   }
 
   @Override
@@ -72,12 +75,15 @@ public class ExtraitsDecesServiceImpl implements ExtraitsDecesService {
     extraitDecesTable = this.genererExtraitDecesTable(commande, nouveauRegistre);
     extraitDecesTable.setId(commande.getId());
     this.jpaExtraitsDecesRepository.save(extraitDecesTable);
+    logger.info("Modification d'un extrait de décès : " + extraitDecesTable.getNom() + " "
+        + extraitDecesTable.getPrenoms());
   }
 
   @Override
   public void supprimer(Long id) {
     try {
       this.jpaExtraitsDecesRepository.deleteById(id);
+      logger.info("Suppression d'un extrait de décès ID : " + id);
     } catch (Exception e) {
       logger.info("###    ERREUR SUPPRESSION EXTRAIT DÉCES   \n" + e.getMessage());
       throw new AndOsEExtraitFunctionnalException("Impossible de supprimer cet extrait de décès !");

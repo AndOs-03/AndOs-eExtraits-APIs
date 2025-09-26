@@ -81,6 +81,8 @@ public class GenererFichierExtraitServiceImpl extends AbstractJasperRapport impl
     this.initialisation("reporting/JrExtraitDeces.jrxml");
     JRBeanCollectionDataSource jrDatasource = this.genererJRDataSource(rapport);
     this.setDataSource(jrDatasource);
+    logger.info(
+        "Génération d'un extrait de décès NOM : " + extaitVm.nom() + " " + extaitVm.prenoms());
     return this.exporter();
   }
 
@@ -105,6 +107,9 @@ public class GenererFichierExtraitServiceImpl extends AbstractJasperRapport impl
     this.initialisation("reporting/JrExtraitMariage.jrxml");
     JRBeanCollectionDataSource jrDatasource = this.genererJRDataSource(rapport);
     this.setDataSource(jrDatasource);
+    logger.info(
+        "Génération d'un extrait de Mariage NOM : " + extaitVm.epoux().getNomPrenoms() + " ET "
+            + extaitVm.epouse().getNomPrenoms());
     return this.exporter();
   }
 
@@ -136,6 +141,9 @@ public class GenererFichierExtraitServiceImpl extends AbstractJasperRapport impl
 
     JRBeanCollectionDataSource jrDatasource = this.genererJRDataSource(rapport);
     this.setDataSource(jrDatasource);
+    logger.info(
+        "Génération d'un extrait de Naissance NOM : " + extaitVm.personne().getNom() + " "
+            + extaitVm.personne().getPrenoms());
     return this.exporter();
   }
 
