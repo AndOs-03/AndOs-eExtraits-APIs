@@ -33,3 +33,7 @@ build/
 .vscode/
 /logs/
 /uploads/
+
+/.env
+/notes.txt
+/wait-for-it.sh
