@@ -3,9 +3,9 @@ FROM eclipse-temurin:17-jdk-jammy AS build
 WORKDIR /app
 
 ARG CACHE_BUST
-RUN echo "Cache buster: $CACHE_BUST"
+RUN echo "Cache buster for sources: $CACHE_BUST"
 
-COPY . .
+COPY src/ ./src
 RUN chmod +x mvnw
 
 RUN ./mvnw install:install-file -Dfile=./src/main/resources/fonts/jasperfont-calibri.jar -DgroupId=com.andos.jasperfonts -DartifactId=jasperfont-calibri -Dversion=1.0 -Dpackaging=jar
