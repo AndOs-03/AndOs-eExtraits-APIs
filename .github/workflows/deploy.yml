@@ -40,7 +40,5 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /andos-eextraits-back
-            echo "VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}" > .env.production
             docker-compose pull
             docker-compose up -d --force-recreate
