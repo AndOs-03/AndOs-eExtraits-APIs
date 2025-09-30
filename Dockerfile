@@ -9,11 +9,8 @@ RUN chmod +x mvnw
 
 COPY src/ ./src
 
-#RUN ./mvnw install:install-file -Dfile=./jasperfont-calibri.jar -DgroupId=com.andos.jasperfonts -DartifactId=jasperfont-calibri -Dversion=1.0 -Dpackaging=jar
-#RUN ./mvnw install:install-file -Dfile=./jasperfont-georgia.jar -DgroupId=com.andos.jasperfonts -DartifactId=jasperfont-georgia -Dversion=1.0 -Dpackaging=jar
-
-RUN ./mvnw install:install-file -Dfile=./src/main/resources/fonts/jasperfont-calibri.jar -DgroupId=com.andos.jasperfonts -DartifactId=jasperfont-calibri -Dversion=1.0 -Dpackaging=jar
-RUN ./mvnw install:install-file -Dfile=./src/main/resources/fonts/jasperfont-georgia.jar -DgroupId=com.andos.jasperfonts -DartifactId=jasperfont-georgia -Dversion=1.0 -Dpackaging=jar
+RUN ./mvnw install:install-file -Dfile=./jasperfont-calibri.jar -DgroupId=com.andos.jasperfonts -DartifactId=jasperfont-calibri -Dversion=1.0 -Dpackaging=jar
+RUN ./mvnw install:install-file -Dfile=./jasperfont-georgia.jar -DgroupId=com.andos.jasperfonts -DartifactId=jasperfont-georgia -Dversion=1.0 -Dpackaging=jar
 
 RUN ./mvnw dependency:resolve
 RUN ./mvnw package -DskipTests
