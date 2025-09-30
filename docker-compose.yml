@@ -32,7 +32,7 @@ services:
 
   # Service Spring Boot
   andos-eextraits-back:
-    build: . # Le chemin vers le Dockerfile de Spring Boot
+    build: ./andos-eextraits-back # Le chemin vers le Dockerfile de Spring Boot
     image: andos-eextraits-back
     container_name: andos-eextraits-back
     restart: always
