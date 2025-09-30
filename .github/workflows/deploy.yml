@@ -29,7 +29,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: ./andos-eextraits-back
-          file: ./andos-eextraits-front/Dockerfile  # Assurez-vous que ce chemin est correct
+          file: ./andos-eextraits-back/Dockerfile  # Assurez-vous que ce chemin est correct
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/andos-eextraits-back:latest
 
