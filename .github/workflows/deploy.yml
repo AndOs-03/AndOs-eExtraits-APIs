@@ -39,7 +39,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          source: "docker-compose.yml" # Le fichier à copier depuis le dépôt
+          source: "Dockerfile,docker-compose.yml" # Le fichier à copier depuis le dépôt
           target: "/root/andos_eextraits_back"
 
       - name: Deploy to server
@@ -58,5 +58,5 @@ jobs:
             echo "MYSQL_USER=${{ secrets.MYSQL_USER }}" >> .env
             echo "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" >> .env
             
-            docker-compose pull
-            docker-compose up -d --force-recreate
+            docker-compose build andos-eextraits-back
+            docker-compose up -d --force-recreate andos-eextraits-back
