@@ -55,4 +55,5 @@ jobs:
             echo "MYSQL_USER=${{ secrets.MYSQL_USER }}" >> .env
             echo "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" >> .env
             
+            docker-compose build andos-eextraits-back
             docker-compose up -d --force-recreate andos-eextraits-back
