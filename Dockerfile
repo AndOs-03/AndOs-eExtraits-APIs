@@ -5,6 +5,7 @@ COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 COPY src/main/resources/fonts/jasperfont-calibri.jar ./
 COPY src/main/resources/fonts/jasperfont-georgia.jar ./
+RUN chmod +x mvnw
 RUN ./mvnw install:install-file -Dfile=./jasperfont-calibri.jar -DgroupId=com.andos.jasperfonts -DartifactId=jasperfont-calibri -Dversion=1.0 -Dpackaging=jar
 RUN ./mvnw install:install-file -Dfile=./jasperfont-georgia.jar -DgroupId=com.andos.jasperfonts -DartifactId=jasperfont-georgia -Dversion=1.0 -Dpackaging=jar
 RUN ./mvnw dependency:go-offline
