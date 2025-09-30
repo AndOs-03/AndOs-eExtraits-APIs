@@ -5,6 +5,9 @@ on:
     branches:
       - deploy/andos-eextraits.0.0.1  # Déclenche le workflow à chaque push sur la branche 'main'
 
+env:
+  VITE_BASE_URL: ${{ secrets.VITE_BASE_URL }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest  # Utilise un runner Ubuntu
@@ -37,7 +40,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           source: "docker-compose.yml" # Le fichier à copier depuis le dépôt
-          target: "/root"
+          target: "/root/andos_eextraits_back"
 
       - name: Deploy to server
         uses: appleboy/ssh-action@master
@@ -46,6 +49,14 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /root
+            # Navigue vers le répertoire du projet
+            cd /root/andos_eextraits_back
+            
+            # Crée un fichier .env sur le serveur avec les variables de la base de données
+            echo "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" > .env
+            echo "MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> .env
+            echo "MYSQL_USER=${{ secrets.MYSQL_USER }}" >> .env
+            echo "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" >> .env
+            
             docker-compose pull
             docker-compose up -d --force-recreate
