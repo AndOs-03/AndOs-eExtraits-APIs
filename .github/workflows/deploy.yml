@@ -29,6 +29,8 @@ jobs:
           file: ./Dockerfile  # Assurez-vous que ce chemin est correct
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/andos-eextraits-back:latest
+          build-args: |
+            CACHE_BUST=${{ github.sha }}
 
       - name: Copy deployment files
         uses: appleboy/scp-action@master

@@ -2,6 +2,7 @@
 FROM eclipse-temurin:17-jdk-jammy AS build
 WORKDIR /app
 
+ARG CACHE_BUST
 COPY . .
 RUN chmod +x mvnw
 
