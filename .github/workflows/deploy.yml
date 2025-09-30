@@ -40,6 +40,6 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /root
+            cd /root/AndOs-eExtraits-APIs
             docker-compose pull
             docker-compose up -d --force-recreate
