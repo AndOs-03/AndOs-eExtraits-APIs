@@ -30,17 +30,17 @@ jobs:
           file: ./Dockerfile  # Assurez-vous que ce chemin est correct
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/andos-eextraits-back:latest
-#          build-args: |
-#            CACHE_BUST=${{ github.sha }}
+          build-args: |
+            CACHE_BUST=${{ github.sha }}
 
-#      - name: Copy deployment files
-#        uses: appleboy/scp-action@master
-#        with:
-#          host: ${{ secrets.SSH_HOST }}
-#          username: ${{ secrets.SSH_USERNAME }}
-#          key: ${{ secrets.SSH_KEY }}
-#          source: "Dockerfile,docker-compose.yml,pom.xml,mvnw,.mvn,src"
-#          target: "/root/andos_eextraits_back"
+      - name: Copy deployment files
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          source: "Dockerfile,docker-compose.yml,pom.xml,mvnw,.mvn,src"
+          target: "/root/andos_eextraits_back"
 
       - name: Deploy to server
         uses: appleboy/ssh-action@master
@@ -49,8 +49,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            # Navigue vers le répertoire du projet
-            # cd /root/andos_eextraits_back
+            cd /root/andos_eextraits_back
             
             # Crée un fichier .env sur le serveur avec les variables de la base de données
             echo "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" > .env
