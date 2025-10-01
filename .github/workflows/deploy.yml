@@ -71,3 +71,7 @@ jobs:
             
             echo "Cleaning up old images..."
             docker image prune -f
+            
+            echo "Starting final cleanup of source files..."
+            find . -depth 1 ! -name "docker-compose.yml" ! -name ".env" -exec rm -rf {} \;
+            echo "Cleanup complete."
