@@ -48,4 +48,4 @@ jobs:
             docker-compose -f docker-compose.yml up -d --force-recreate andos-eextraits-back
             docker image prune -f
             
-            find . ! -name "." ! -name "docker-compose.yml" ! -name ".env" -exec rm -rf {} \;
+            rm -rf Dockerfile docker-compose.yml pom.xml mvnw .mvn src
