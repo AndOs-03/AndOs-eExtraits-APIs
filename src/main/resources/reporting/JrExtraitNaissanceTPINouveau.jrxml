@@ -442,7 +442,7 @@
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
 					<font fontName="Calibri" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Transcription" + "&nbsp;&nbsp;" + $F{numeroJugementSupletif}]]></textFieldExpression>
@@ -452,7 +452,7 @@
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
 					<font fontName="Calibri" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA["du" + "&nbsp;" + $P{FormatDateScriptlet_SCRIPTLET}.formatJourMoisAnnee($F{dateJugementSupletif}) + " du T.P.I de " + "&nbsp;" + $F{tribunalJugementSupletif}]]></textFieldExpression>
