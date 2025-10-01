@@ -50,7 +50,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             # Navigue vers le répertoire du projet
-            cd /root/andos_eextraits_back
+            # cd /root/andos_eextraits_back
             
             # Crée un fichier .env sur le serveur avec les variables de la base de données
             echo "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" > .env
