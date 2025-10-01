@@ -49,14 +49,25 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /root/andos_eextraits_back
-            
-            # Crée un fichier .env sur le serveur avec les variables de la base de données
+            TARGET_DIR="/root/andos_eextraits_back"
+
+            if [ ! -d "$TARGET_DIR" ]; then
+              echo "Error: Directory $TARGET_DIR does not exist."
+              exit 1
+            fi
+            cd $TARGET_DIR
+
+            echo "Creating .env file in $TARGET_DIR"
             echo "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" > .env
             echo "MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> .env
             echo "MYSQL_USER=${{ secrets.MYSQL_USER }}" >> .env
             echo "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" >> .env
+
+            echo "Pulling new Docker image..."
+            docker pull ${{ secrets.DOCKER_USERNAME }}/andos-eextraits-back:latest
+
+            echo "Running docker-compose up..."
+            docker-compose -f docker-compose.yml up -d --force-recreate andos-eextraits-back
             
-            IMAGE_TAG=${{ secrets.DOCKER_USERNAME }}/andos-eextraits-back:latest
-            docker pull $IMAGE_TAG
-            docker-compose up -d --force-recreate andos-eextraits-back
+            echo "Cleaning up old images..."
+            docker image prune -f
