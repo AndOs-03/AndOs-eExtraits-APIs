@@ -12,12 +12,5 @@ Décès`)
   -Dpackaging=jar`
 
 # DEPLOYER SUR UN SERVEUR
-- BASE DE DONNEES:
-
-*Commande en local*
-
-    `scp -r andos-eextraits-bdd root@ip-mon-server:/tmp/`
-
-*Commande pour le server en ligne*
-
-    `scp -r andos-eextraits-bdd root@ip-mon-server:/tmp/`
+- Copie de dossier : `scp -r /chemin/dossier/fonts user@IP_SERVER:/chemin/dossier/fonts`
+- Copie de fichier : `scp /chemin/dossier/fonts/fonts.txt user@IP_SERVER:/chemin/dossier/fonts`
