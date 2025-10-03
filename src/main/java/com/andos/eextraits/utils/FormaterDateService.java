@@ -6,6 +6,7 @@ import java.time.YearMonth;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Locale;
 import lombok.Getter;
 import lombok.Setter;
 import net.sf.jasperreports.engine.JRDefaultScriptlet;
@@ -110,7 +111,7 @@ public class FormaterDateService extends JRDefaultScriptlet {
    * @return le mois au format Janvier
    */
   public static String dateVersMoisEnLettre(LocalDate date) {
-    var formatter = DateTimeFormatter.ofPattern("MMMM");
+    var formatter = DateTimeFormatter.ofPattern("MMMM", Locale.FRENCH);
     return date.format(formatter);
   }
 }
