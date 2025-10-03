@@ -11,6 +11,7 @@ import com.andos.eextraits.dto.vm.ExtraitMariageDetailsVM;
 import com.andos.eextraits.dto.vm.ExtraitNaissanceDetailsVM;
 import com.andos.eextraits.dto.vm.InstitutionVM;
 import com.andos.eextraits.dto.vm.MentionsEventuelleExportVM;
+import com.andos.eextraits.exception.AndOsEExtraitFunctionnalException;
 import com.andos.eextraits.mappers.ExtraitsDecesMapper;
 import com.andos.eextraits.mappers.ExtraitsMariageMapper;
 import com.andos.eextraits.mappers.ExtraitsNaissanceMapper;
@@ -61,6 +62,10 @@ public class GenererFichierExtraitServiceImpl extends AbstractJasperRapport impl
   @Override
   public ByteArrayOutputStream extraitDeces(ExtraitDecesDetailsVM extaitVm, Long institutionId,
       Long centreId) {
+    if (Objects.isNull(centreId) || Objects.isNull(institutionId)) {
+      throw new AndOsEExtraitFunctionnalException("Veillez choisir le centre et l'institution !");
+    }
+
     InstitutionVM institutionVm = this.institutionsService.recupererParId(institutionId);
     CentreVM centreVm = this.centresService.recupererParId(centreId);
 
@@ -89,6 +94,10 @@ public class GenererFichierExtraitServiceImpl extends AbstractJasperRapport impl
   @Override
   public ByteArrayOutputStream extraitMariage(ExtraitMariageDetailsVM extaitVm, Long institutionId,
       Long centreId) {
+    if (Objects.isNull(centreId) || Objects.isNull(institutionId)) {
+      throw new AndOsEExtraitFunctionnalException("Veillez choisir le centre et l'institution !");
+    }
+
     InstitutionVM institutionVm = this.institutionsService.recupererParId(institutionId);
     CentreVM centreVm = this.centresService.recupererParId(centreId);
 
@@ -116,6 +125,10 @@ public class GenererFichierExtraitServiceImpl extends AbstractJasperRapport impl
   @Override
   public ByteArrayOutputStream extraitNaissance(ExtraitNaissanceDetailsVM extaitVm,
       Long institutionId) {
+    if (Objects.isNull(institutionId)) {
+      throw new AndOsEExtraitFunctionnalException("Veillez choisir l'institution !");
+    }
+
     CentreVM centreVm = this.centresService.recupererParId(extaitVm.centre().id());
     InstitutionVM institutionVm = this.institutionsService.recupererParId(institutionId);
     ExportExtraitNaissanceVM rapport = this.extraitsNaissanceMapper
