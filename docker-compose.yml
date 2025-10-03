@@ -24,10 +24,20 @@ services:
       - andos-eextraits-applications-network
 
   # Container IHM pour voir la base de données
-  andos-eextraits-ihm:
-    image: adminer:4.8.1-standalone
-    container_name: andos-eextraits-db-ihm
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
     restart: always
+    environment:
+      PMA_HOST: andos-eextraits-database
+      PMA_PORT: 3306
+      PMA_USER: ${MYSQL_USER}
+      PMA_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "8080:80" # accès via http://localhost:8080
+    depends_on:
+      andos-eextraits-database:
+        condition: service_healthy
     networks:
       - andos-eextraits-applications-network
 
