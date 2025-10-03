@@ -109,6 +109,10 @@ public class ExtraitsNaissancesServiceImpl implements ExtraitsNaissancesService 
 
   @Override
   public ExtraitNaissanceDetailsVM recupererParRegistre(String registre, Long centreId) {
+    if (Objects.isNull(centreId)) {
+      throw new AndOsEExtraitFunctionnalException("Veillez renseigner le centre !");
+    }
+
     ExtraitNaissancesTable extraitTable = this.jpaExtraitsNaissancesRepository
         .findByRegistreAndCentreId(registre, centreId)
         .orElseThrow(() -> new ObjetNonTrouveException("L'extrait de naissance n'existe pas !"));
@@ -117,6 +121,10 @@ public class ExtraitsNaissancesServiceImpl implements ExtraitsNaissancesService 
 
   @Override
   public List<ExtraitNaissanceEssentielVM> lister(Long centreId) {
+    if (Objects.isNull(centreId)) {
+      throw new AndOsEExtraitFunctionnalException("Veillez renseigner le centre !");
+    }
+
     List<ExtraitNaissancesTable> extraitTables = this.jpaExtraitsNaissancesRepository
         .findByCentreId(centreId);
     return extraitTables.stream()
