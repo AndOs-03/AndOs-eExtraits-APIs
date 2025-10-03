@@ -3,7 +3,7 @@ name: CI/CD Backend
 on:
   push:
     branches:
-      - deploy/andos-eextraits.0.0.1
+      - develop
   workflow_dispatch:
 
 jobs:
