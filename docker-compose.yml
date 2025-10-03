@@ -15,7 +15,6 @@ services:
       - andos-eextraits-mysql-data:/var/lib/mysql
     ports:
       - "3306:3306"
-    env_file: .env
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "${MYSQL_USER}", "-p${MYSQL_PASSWORD}"]
       timeout: 20s
@@ -47,7 +46,6 @@ services:
       - SPRING_DATASOURCE_PASSWORD=${MYSQL_PASSWORD}
     ports:
       - "8083:8083"
-    env_file: .env
     networks:
       - andos-eextraits-applications-network
 
