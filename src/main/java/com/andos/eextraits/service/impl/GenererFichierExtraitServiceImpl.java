@@ -242,6 +242,9 @@ public class GenererFichierExtraitServiceImpl extends AbstractJasperRapport impl
       BigDecimal anneeChiffre = BigDecimal.valueOf(date.getYear());
       String annee = FormaterChiffreService.convertirValeurEnLettre(anneeChiffre);
 
+      if (jour.equals("un")) {
+        jour = "premier";
+      }
       dateLettre = jour + " " + mois + " " + annee;
     }
 
