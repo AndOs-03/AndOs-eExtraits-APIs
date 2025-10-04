@@ -5,6 +5,7 @@ import com.andos.eextraits.service.UtilisateurService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -26,8 +27,18 @@ public class UtilisateursController {
   @GetMapping("/recuperer-par-username")
   @ResponseStatus(HttpStatus.OK)
   public ResponseEntity<UtilisateurVM> utilisateurParUserName(
-      @RequestParam("username") String username) {
+      @RequestParam("username") String username
+  ) {
     UtilisateurVM utilisateurVm = this.utilisateurService.utilisateurParUserName(username);
+    return ResponseEntity.ok(utilisateurVm);
+  }
+
+  @GetMapping("/{utilisateurId}/recuperer-par-id")
+  @ResponseStatus(HttpStatus.OK)
+  public ResponseEntity<UtilisateurVM> utilisateurParId(
+      @PathVariable("utilisateurId") Long utilisateurId
+  ) {
+    UtilisateurVM utilisateurVm = this.utilisateurService.utilisateurParId(utilisateurId);
     return ResponseEntity.ok(utilisateurVm);
   }
 }

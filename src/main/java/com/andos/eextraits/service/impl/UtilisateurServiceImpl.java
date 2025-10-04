@@ -101,4 +101,17 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         utilisateur.getEmail()
     );
   }
+
+  @Override
+  public UtilisateurVM utilisateurParId(Long id) {
+    UtilisateurTable utilisateur = this.jpaUtilisateurRepository.findById(id)
+        .orElseThrow(() -> new ObjetNonTrouveException("Utilisateur non trouvé !"));
+    return new UtilisateurVM(
+        utilisateur.getId(),
+        utilisateur.getNom(),
+        utilisateur.getPrenom(),
+        utilisateur.getNomUtilisateur(),
+        utilisateur.getEmail()
+    );
+  }
 }
