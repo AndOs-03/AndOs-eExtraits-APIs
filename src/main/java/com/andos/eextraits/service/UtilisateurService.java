@@ -15,4 +15,6 @@ public interface UtilisateurService {
   JwtToken connexion(ConnexionCommande commande);
 
   UtilisateurVM utilisateurParUserName(String username);
+
+  UtilisateurVM utilisateurParId(Long id);
 }
