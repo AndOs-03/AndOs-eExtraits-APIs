@@ -45,7 +45,7 @@ jobs:
             echo "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" >> .env
             
             docker-compose build andos-eextraits-back
-            docker-compose -f docker-compose.yml up -d --force-recreate andos-eextraits-back
+            docker-compose -f docker-compose.yml up -d --force-recreate
             docker image prune -f
             
             rm -rf Dockerfile docker-compose.yml pom.xml mvnw .mvn src
