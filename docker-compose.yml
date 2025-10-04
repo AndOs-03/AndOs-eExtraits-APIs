@@ -63,7 +63,6 @@ services:
 
 volumes:
   andos-eextraits-mysql-data:
-    external: true
     name: andos-eextraits-mysql-data
 
 networks:
