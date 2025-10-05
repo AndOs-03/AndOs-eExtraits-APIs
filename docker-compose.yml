@@ -13,8 +13,6 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - andos-eextraits-mysql-data:/var/lib/mysql
-    ports:
-      - "3306:3306"
     env_file: .env
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "${MYSQL_USER}", "-p${MYSQL_PASSWORD}"]
