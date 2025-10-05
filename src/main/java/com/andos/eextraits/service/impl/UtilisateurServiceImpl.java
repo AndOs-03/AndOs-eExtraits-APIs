@@ -46,7 +46,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
   @Override
   public void creer(CreerUtilisateurCommande commande) {
-    String userName = commande.nomUtilisateur();
+    String userName = commande.nomUtilisateur().strip();
     boolean exists = this.jpaUtilisateurRepository.existsByNomUtilisateur(userName);
     if (exists) {
       throw new AndOsEExtraitFunctionnalException("Ce nom d'utilisateur existe déjà !");
@@ -64,7 +64,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
   @Override
   public JwtToken connexion(ConnexionCommande commande) {
-    String userName = commande.nomUtilisateur();
+    String userName = commande.nomUtilisateur().strip();
     UtilisateurTable utilisateurTable = this.jpaUtilisateurRepository.findByNomUtilisateur(userName)
         .orElseThrow(() -> new AndOsEExtraitFunctionnalException("Email ou mot de passe incorrect"
             + " !"));
